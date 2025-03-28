@@ -1,6 +1,6 @@
 @ResumeCreatorBackend_HostAddress = http://localhost:5116
 
-GET {{ResumeCreatorBackend_HostAddress}}/weatherforecast/
+POST {{ResumeCreatorBackend_HostAddress}}/aiapi/
 Accept: application/json
 
 ###
