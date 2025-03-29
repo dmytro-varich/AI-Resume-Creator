@@ -1,0 +1,9 @@
+docker exec -it d4e5f6g7h8i9 sh
+
+# add a pending migration
+dotnet ef migrations add InitialCreate
+
+# apply pending migrations
+dotnet ef database update
+
+docker exec -it postgres psql -U postgres -d mydatabase
