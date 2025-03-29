@@ -2,38 +2,22 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using System.Text;
 using Microsoft.Extensions.Configuration;
+using ResumeCreatorBackend.Services;
 
 namespace ResumeCreatorBackend.Controllers
 {
 
     [ApiController]
     [Route("api/[controller]")]
-    public class AIApiController : ControllerBase
+    public class AICommunicationController : ControllerBase
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly IConfiguration _configuration;
+        private readonly AICommunicationService _aiCommunicationService;
 
-        public AIApiController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        public AICommunicationController(IHttpClientFactory httpClientFactory, AICommunicationService aiCommunicationService)
         {
             _httpClientFactory = httpClientFactory;
-            _configuration = configuration;
-        }
-
-        private async Task<HttpResponseMessage> SendAPIRequest(HttpClient client, string message)
-        {
-            // Get the base url from the configuration
-            var baseUrl = _configuration["ApiSettings:BaseUrl"];
-
-            // Create the request url with the message
-            string apiUrl = $"{baseUrl}?message={Uri.EscapeDataString(message)}";
-
-            // Create a GET request with the given url
-            var request = new HttpRequestMessage(HttpMethod.Get, apiUrl);
-
-            // Send the request using given client and get the response
-            HttpResponseMessage response = await client.SendAsync(request);
-
-            return response;
+            _aiCommunicationService = aiCommunicationService;
         }
 
         [HttpPost("process")]
@@ -49,7 +33,7 @@ namespace ResumeCreatorBackend.Controllers
             var client = _httpClientFactory.CreateClient();
 
             // Get the AI API response for the given request message
-            HttpResponseMessage response = await SendAPIRequest(client, message);
+            HttpResponseMessage response = await _aiCommunicationService.SendRequest(client, message);
 
             if (response.IsSuccessStatusCode)
             {

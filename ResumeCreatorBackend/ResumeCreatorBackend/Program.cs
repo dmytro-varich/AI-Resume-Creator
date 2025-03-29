@@ -14,6 +14,7 @@ builder.Services.AddSwaggerGen();
 // Register client factory
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<AICommunicationService>();
 
 // DbContext registration
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
