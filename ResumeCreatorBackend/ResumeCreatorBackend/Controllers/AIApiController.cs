@@ -7,7 +7,7 @@ namespace ResumeCreatorBackend.Controllers
 {
 
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class AIApiController : ControllerBase
     {
         private readonly IHttpClientFactory _httpClientFactory;

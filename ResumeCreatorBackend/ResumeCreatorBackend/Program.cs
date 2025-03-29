@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ResumeCreatorBackend.Data;
+using ResumeCreatorBackend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddSwaggerGen();
 
 // Register client factory
 builder.Services.AddHttpClient();
+builder.Services.AddScoped<AccountService>();
 
 // DbContext registration
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
