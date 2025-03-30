@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using ResumeCreatorBackend.Controllers;
 using ResumeCreatorBackend.Data;
 using ResumeCreatorBackend.Models;
@@ -17,8 +19,14 @@ namespace ResumeCreatorBackend.Services
             _passwordHasher = new PasswordHasher<AccountModel>();
         }
 
-        public void CreateAccount(string email, string password)
+        public async Task<AccountModel> CreateAccountAsync(string email, string password)
         {
+
+            if(await GetAccountAsync(email) != null)
+            {
+                throw new InvalidOperationException("Account with the given email alredy exists.");
+            }
+
             var account = new AccountModel
             {
                 Email = email
@@ -28,7 +36,41 @@ namespace ResumeCreatorBackend.Services
             account.PasswordHash = _passwordHasher.HashPassword(account, password);
 
             _context.Accounts.Add(account);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+            
+            return account;
+        }
+
+        public async Task<AccountModel?> GetAccountAsync(string email)
+        {
+            var account = await _context.Accounts.SingleOrDefaultAsync(a => a.Email == email);
+            
+            // If any detailed implementation for default value would be needed
+            if (account == null)
+            {
+                return null;
+            }
+
+            return account;
+        }
+
+        protected bool VerifyPassword(AccountModel account, string enteredPassword)
+        {
+            var result = _passwordHasher.VerifyHashedPassword(account, account.PasswordHash, enteredPassword);
+
+            return result == PasswordVerificationResult.Success;
+        }
+
+        public async Task<bool> VerifyPasswordByEmailAsync(string email, string enteredPassword)
+        {
+            var account = await GetAccountAsync(email);
+
+            if (account == null)
+            {
+                throw new KeyNotFoundException($"No user found with email: {email}");
+            }
+
+            return VerifyPassword(account, enteredPassword);
         }
     }
 }

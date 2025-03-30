@@ -7,3 +7,5 @@ dotnet ef migrations add InitialCreate
 dotnet ef database update
 
 docker exec -it postgres psql -U postgres -d mydatabase
+
+SELECT * FROM "Accounts";

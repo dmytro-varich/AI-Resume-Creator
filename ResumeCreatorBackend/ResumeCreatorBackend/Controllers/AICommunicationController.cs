@@ -21,7 +21,7 @@ namespace ResumeCreatorBackend.Controllers
         }
 
         [HttpPost("process")]
-        public async Task<IActionResult> ProcessMessage([FromBody] string message)
+        public async Task<IActionResult> ProcessMessageAsync([FromBody] string message)
         {
             // Check if prompt is empty
             if (string.IsNullOrWhiteSpace(message))
@@ -33,7 +33,7 @@ namespace ResumeCreatorBackend.Controllers
             var client = _httpClientFactory.CreateClient();
 
             // Get the AI API response for the given request message
-            HttpResponseMessage response = await _aiCommunicationService.SendRequest(client, message);
+            HttpResponseMessage response = await _aiCommunicationService.SendRequestAsync(client, message);
 
             if (response.IsSuccessStatusCode)
             {

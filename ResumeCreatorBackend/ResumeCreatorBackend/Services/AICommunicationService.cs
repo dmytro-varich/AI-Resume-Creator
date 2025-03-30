@@ -11,7 +11,7 @@ namespace ResumeCreatorBackend.Services
             _configuration = configuration;
         }
 
-        public async Task<HttpResponseMessage> SendRequest(HttpClient client, string message)
+        public async Task<HttpResponseMessage> SendRequestAsync(HttpClient client, string message)
         {
             // Get the base url from the configuration
             var baseUrl = _configuration["ApiSettings:BaseUrl"];

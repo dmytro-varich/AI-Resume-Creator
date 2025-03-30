@@ -30,8 +30,8 @@ namespace ResumeCreatorBackend.Controllers
             _accountService = accountService;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateAccount([FromBody] CreateAccountTemp receivedModel)
+        [HttpPost("CreateAccountAsync")]
+        public async Task<IActionResult> CreateAccountAsync([FromBody] CreateAccountTemp receivedModel)
         {
             if (receivedModel == null)
             {
@@ -45,12 +45,48 @@ namespace ResumeCreatorBackend.Controllers
 
             try
             {
-                _accountService.CreateAccount(receivedModel.Email, receivedModel.Password);
+                await _accountService.CreateAccountAsync(receivedModel.Email, receivedModel.Password);
                 return Ok("Account created successfully.");
+            }
+            catch(InvalidOperationException ex)
+            {
+                return BadRequest("Account with the given email already exists.");
             }
             catch(Exception ex)
             {
                 return StatusCode(500, "An unexpected error occured while creating the user.");
+            }
+
+        }
+
+        [HttpPost("VerifyPasswordAsync")]
+        public async Task<IActionResult> VerifyPasswordAsync([FromBody] CreateAccountTemp receivedModel)
+        {
+            if (receivedModel == null)
+            {
+                return BadRequest("Account data is required.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                if(await _accountService.VerifyPasswordByEmailAsync(receivedModel.Email, receivedModel.Password))
+                {
+                    return Ok("Password is correct.");
+                }
+                return Unauthorized("Password is invalid.");
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound($"There is no user with the {receivedModel.Email} email.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
             }
 
         }
