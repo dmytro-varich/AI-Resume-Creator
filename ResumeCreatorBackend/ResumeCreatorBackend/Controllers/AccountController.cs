@@ -6,6 +6,7 @@ using ResumeCreatorBackend.Models;
 using ResumeCreatorBackend.Services;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace ResumeCreatorBackend.Controllers
 {
     public class CreateAccountTemp

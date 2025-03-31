@@ -33,7 +33,7 @@ namespace ResumeCreatorBackend.Controllers
             var client = _httpClientFactory.CreateClient();
 
             // Get the AI API response for the given request message
-            HttpResponseMessage response = await _aiCommunicationService.SendRequestAsync(client, message);
+            HttpResponseMessage response = await _aiCommunicationService.SendRequestAsync(client, message, modelName:"deepseek-r1:latest");
 
             if (response.IsSuccessStatusCode)
             {
@@ -45,5 +45,7 @@ namespace ResumeCreatorBackend.Controllers
                 return StatusCode((int)response.StatusCode, $"API answered with {await response.Content.ReadAsStringAsync()}");
             }
         }
+
+
     }
 }
