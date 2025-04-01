@@ -22,7 +22,7 @@ namespace ResumeCreatorBackend.Services
             {
                 if(kvp.Value != null)
                 {
-                    sb.Append($"{kvp.Key}:{kvp.Value}, ");
+                    sb.Append($"{kvp.Key}:{kvp.Value.ToString()}, ");
                 }
             }
 
