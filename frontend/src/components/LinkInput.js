@@ -1,17 +1,15 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
-const LinkInput = ({ label, placeholder, icon, id }) => {
+const LinkInput = forwardRef(({ label, placeholder, icon, id }, ref ) => {
   return (
     <div className="link-input-container">
       <div className="icon-text">
         {icon}
         <span>{label}</span> 
       </div>
-      <input id={id} type="text" placeholder={placeholder} />
+      <input id={id} type="text" placeholder={placeholder} ref={ref} />
     </div>
   );
-};
-
-
+});
 
 export default LinkInput;

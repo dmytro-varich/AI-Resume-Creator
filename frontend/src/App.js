@@ -1,36 +1,6 @@
 import React from "react";
-import Header from "./components/Header";
-import Links from "./components/Links";
-import Preferences from "./components/Preferences";
-import Buttons from "./components/Buttons";
-import { DownloadButtons } from "./components/Buttons";
-import Account from "./components/Account"
-import Resume from "./components/Resume";
-
-class ResumeForm extends React.Component {
-  render() {
-    return (
-      <div className="resume-form">
-        <Account />
-        <Header />
-        <Links />
-        <Preferences />
-        <Buttons />
-      </div>
-    );
-  }
-}
-
-class Visualisation extends React.Component {
-  render() {
-    return (
-      <div className="resume-visualization">
-        <DownloadButtons />
-        <Resume />
-      </div>
-    );
-  }
-}
+import ResumeForm from "./components/ResumeForm";
+import Visualisation from "./components/Visualisation";
 
 class App extends React.Component {
   render() {
