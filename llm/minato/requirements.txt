@@ -1,0 +1,6 @@
+fastapi==0.115.12
+ollama==0.4.7
+pydantic==2.11.2
+starlette==0.46.1
+uvicorn
+python-multipart
