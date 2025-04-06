@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<AICommunicationService>();
+builder.Services.AddScoped<ParserService>();
 
 // DbContext registration
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -37,7 +38,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

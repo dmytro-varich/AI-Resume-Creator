@@ -14,8 +14,8 @@ services:
 
   backend:
     build: ./ResumeCreatorBackend
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+    env_file:
+      - backend_env.env
     container_name: appbackend
     ports:
       - "8080:8080" # first port is the outside port

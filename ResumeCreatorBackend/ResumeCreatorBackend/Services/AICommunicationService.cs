@@ -34,17 +34,17 @@ namespace ResumeCreatorBackend.Services
         public async Task<HttpResponseMessage> SendRequestAsync(HttpClient client, string message, string modelName="mistral:latest", string systemPrompt = _resumeSystemPrompt)
         {
             // Get the base url from the configuration
-            var baseUrl = _configuration["ApiSettings:BaseUrl"];
+            string baseUrl = Environment.GetEnvironmentVariable("AI_API_URL");
 
             string apiUrl;
             // Create the request url with the model, message, system prompt
             if (systemPrompt != "")
             {
-                apiUrl = $"{baseUrl}/{Uri.EscapeDataString(modelName)}?message={Uri.EscapeDataString(message)}&system_prompt={Uri.EscapeDataString(systemPrompt)}";
+                apiUrl = $"{baseUrl}/{Uri.EscapeDataString(modelName)}?message={Uri.EscapeDataString(message)}&system_prompt={Uri.EscapeDataString(systemPrompt)}&keep_alive=1";
             }
             else
             {
-                apiUrl = $"{baseUrl}/{Uri.EscapeDataString(modelName)}?message={Uri.EscapeDataString(message)}";
+                apiUrl = $"{baseUrl}/{Uri.EscapeDataString(modelName)}?message={Uri.EscapeDataString(message)}&keep_alive=1";
             }
 
             // Create a GET request with the given url

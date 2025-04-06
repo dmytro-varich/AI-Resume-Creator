@@ -13,8 +13,25 @@ namespace ResumeCreatorBackend.Services
     {
         public ParserService() { }
 
-        public async Task<Dictionary<string, object>> GetResponseAsDictionaryAsync(HttpClient client, string parserUrl, object payload)
+        public async Task<Dictionary<string, object>> GetResponseAsDictionaryMockUp(HttpClient client, string parserUrl, object payload)
         {
+            Dictionary<string, object> resultObjects = new Dictionary<string, object>{
+                {"name", "John" },
+                {"surname", "Smith" },
+                {"university", "TUKE" },
+                {"job_title", "Sales Manager" },
+                {"work_experience", "5 years" },
+                {"skills", "Python, C#, Sales, Marketing" }
+
+            };
+            
+
+            return resultObjects;
+        }
+
+        public async Task<Dictionary<string, object>> PostPayloadDictionaryAndGetResponseAsDictionaryAsync(HttpClient client, string parserUrl, object payload)
+        {
+            // PostAsJson
             HttpResponseMessage response = await client.PostAsJsonAsync(parserUrl, payload);
             response.EnsureSuccessStatusCode();
 
