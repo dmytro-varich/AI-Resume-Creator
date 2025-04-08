@@ -26,6 +26,19 @@ services:
       "on-failure:3"
     networks:
       - common_network
+      
+
+  parser:
+    build: ./ParsingService
+#    env_file:
+#      - backend_env.env
+    container_name: appparser
+    ports:
+      - "5000:5000" # first port is the outside port
+    restart:
+      "on-failure:3"
+    networks:
+      - common_network
 
 
 volumes:

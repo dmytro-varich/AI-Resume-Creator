@@ -6,12 +6,15 @@ using ResumeCreatorBackend.Models;
 using ResumeCreatorBackend.Services;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
 
 namespace ResumeCreatorBackend.Controllers
 {
     public class UserInputTemp
     {
-        public string LinkerdInLink { get; set; }
+        //public string LinkerdInLink { get; set; }
         public string GitHubLink { get; set; }
         public string? UserPrompt { get; set; }
 
@@ -32,6 +35,7 @@ namespace ResumeCreatorBackend.Controllers
             _aiCommunicationService = aiCommunicationService;
         }
 
+
         [HttpPost("CreateResumeFromResources")]
         public async Task<IActionResult> CreateResumeAsync([FromBody] UserInputTemp userInputTemp)
         {
@@ -49,31 +53,32 @@ namespace ResumeCreatorBackend.Controllers
             var client = _httpClientFactory.CreateClient();
             client.Timeout = TimeSpan.FromMinutes(5);
 
+
+
             Dictionary<string, object> resourcesLinks = new Dictionary<string, object>
             {
-                {"linkedInLink", "mockupLink1"},
-                {"gitHubLink", "mockupLink2"}
+                {"GitHub", userInputTemp.GitHubLink}
             };
 
-            // Get data from the parser
-            Dictionary<string, object> gatheredData = await _parserService.GetResponseAsDictionaryMockUp(client, "http//parserUrlMockup", resourcesLinks);
+            // Get data from the parser  
+            HttpResponseMessage response = await client.PostAsJsonAsync("http://parser:5000/user", resourcesLinks);
+            response.EnsureSuccessStatusCode();
 
-            if (gatheredData == null) {
+            Dictionary<string, object> resultObjects = await response.Content.ReadFromJsonAsync<Dictionary<string, object>>();
+
+            if (resultObjects == null) {
                 return StatusCode(503, "Parser service answered with no data");
             }
 
             // Create prompt from extracted data
-            string dataPrompt = _aiCommunicationService.CreateDataPrompt(gatheredData);
+            string dataPrompt = _aiCommunicationService.CreateDataPrompt(resultObjects);
 
             string promptForSending = dataPrompt + " " + userInputTemp.UserPrompt;
 
-            // Send request to the AI API to write resume code
-            HttpResponseMessage response = await _aiCommunicationService.SendRequestAsync(client, promptForSending, modelName: "deepseek-r1:latest");
-
             if (response.IsSuccessStatusCode)
             {
-                var resultContent = await response.Content.ReadAsStringAsync();
-                return Ok(resultContent);
+                //var resultContent = await response.Content.ReadAsStringAsync();
+                return Ok(promptForSending);
             }
             else
             {
