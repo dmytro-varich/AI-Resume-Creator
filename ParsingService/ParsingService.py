@@ -12,7 +12,8 @@ api = Api(app, version='1.0', title='GitHub User API', description='API to parse
 github_user_model = api.model('GitHubUser', {
     'GitHub': fields.String(description='GitHub username', required=True)
 })
-
+#123321
+#Refactoring!!!!
 # GitHub API URLs
 GITHUB_API_URL = "https://api.github.com/users/"
 GITHUB_API_URL_INTERNAL = "https://api.github.com/repos/"

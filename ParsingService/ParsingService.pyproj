@@ -11,6 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>ParsingService</Name>
     <RootNamespace>ParsingService</RootNamespace>
+    <SuppressEnvironmentCreationPrompt>True</SuppressEnvironmentCreationPrompt>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
