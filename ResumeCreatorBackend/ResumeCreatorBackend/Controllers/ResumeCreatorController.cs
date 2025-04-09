@@ -51,9 +51,7 @@ namespace ResumeCreatorBackend.Controllers
 
             // Create http client
             var client = _httpClientFactory.CreateClient();
-            client.Timeout = TimeSpan.FromMinutes(5);
-
-
+            client.Timeout = TimeSpan.FromMinutes(10);
 
             Dictionary<string, object> resourcesLinks = new Dictionary<string, object>
             {
@@ -75,14 +73,17 @@ namespace ResumeCreatorBackend.Controllers
 
             string promptForSending = dataPrompt + " " + userInputTemp.UserPrompt;
 
-            if (response.IsSuccessStatusCode)
+            // Get the AI API response for the given request message
+            HttpResponseMessage aiAPIresponse = await _aiCommunicationService.SendRequestAsync(client, promptForSending, modelName: "deepseek-r1:latest");
+
+            if (aiAPIresponse.IsSuccessStatusCode)
             {
-                //var resultContent = await response.Content.ReadAsStringAsync();
-                return Ok(promptForSending);
+                var resultContent = await aiAPIresponse.Content.ReadAsStringAsync();
+                return Ok(resultContent);
             }
             else
             {
-                return StatusCode((int)response.StatusCode, $"API answered with {await response.Content.ReadAsStringAsync()}");
+                return StatusCode((int)aiAPIresponse.StatusCode, $"API answered with {await aiAPIresponse.Content.ReadAsStringAsync()}");
             }
         }
     }
