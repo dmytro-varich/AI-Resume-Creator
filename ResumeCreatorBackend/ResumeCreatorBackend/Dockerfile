@@ -1,6 +1,25 @@
 
 # This stage is used when running from VS in fast mode (Default for Debug configuration)
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+
+# Switch to root temporarily to install pdflatex-related packages.
+USER root
+
+# Update package lists and install TeX Live components for pdflatex.
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        texlive-latex-base \
+        texlive-latex-extra \
+        texlive-latex-recommended \
+        texlive-fonts-recommended \
+        texlive-fonts-extra \
+        texlive-humanities \
+        texlive-pictures \
+        texlive-bibtex-extra \
+        texlive-xetex && \
+    rm -rf /var/lib/apt/lists/*
+
+# Switch back to your application user.
 USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
