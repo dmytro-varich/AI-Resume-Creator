@@ -4,7 +4,7 @@ from pathlib import Path
 from starlette.responses import StreamingResponse
 import asyncio
 from pydantic import BaseModel, Field
-from ollama import ListResponse, list, pull
+from ollama import ListResponse, list, pull, Client
 import time
 from typing import List
 import ollama
@@ -12,12 +12,6 @@ import ollama
 
 app = FastAPI(
     title="Minato API",
-    description="Simple RESTful interface that possible usage ollama on coca.",
-    version="0.1.0",
-    contact={
-        "name": "Sidjik",
-        "email": "arsenii.milenchuk@student.tuke.sk",
-    },
 )
 
 
@@ -27,9 +21,7 @@ UPLOAD_DIR.mkdir(exist_ok=True)
 
 
 
-
-
-
+client = Client(host='http://ollama:11434')
 
 
 async def delete_file_later(file_path, delay = 120):
@@ -77,7 +69,7 @@ async def answer_on_query(model_name: str, message: str,
     if system_prompt is not None: 
         message.insert(0, {'role': 'system', 'content': system_prompt})
     try:
-        response = ollama.chat(
+        response = client.chat(
             model=model_name,
             messages = message,
             tools=None,
@@ -140,7 +132,7 @@ async def async_answer_on_query(model_name:str, message: str,
     if system_prompt is not None: 
         message.insert(0, {'role': 'system', 'content': system_prompt})   
     try:
-        response = ollama.chat(
+        response = client.chat(
             model=model_name,
             messages = message,
             tools=None,
@@ -217,7 +209,7 @@ def answer_on_multimodal_query(model_name: str, message: str, images: List[Uploa
         message.insert(0, {'role': 'system', 'content': system_prompt}) 
     # get model response
     try:
-        response = ollama.chat(
+        response = client.chat(
             model=model_name,
             messages = message,
             tools=None,
@@ -298,7 +290,7 @@ async def async_answer_on_multimodal_query(model_name: str, message: str, images
         message.insert(0, {'role': 'system', 'content': system_prompt}) 
     # get model response
     try:
-        response = ollama.chat(
+        response = client.chat(
             model=model_name,
             messages = message,
             tools=None,
@@ -338,7 +330,7 @@ def download_model(model_name: str):
     
     Simply return status of downlod.
     """
-    return {'status' : pull(model_name, stream=False).status}
+    return {'status' : client.pull(model_name, stream=False).status}
 
 
 
@@ -365,7 +357,7 @@ def get_list_available_models():
 
     """
 
-    response: ListResponse = list()
+    response: ListResponse = client.list()
     result = []
     for model in response.models:
         model_info = dict()

@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+  minato-app:
+    build: . 
+    ports:
+      - "8080:80"
+
+    volumes:
+      - ollama_minato:/root/.minato
+    depends_on:
+      - ollama
+    
+    networks: 
+      - minato-net
+
+
+  ollama:
+    # pull ollama from docker repository
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_minato:/root/.ollama  
+
+    networks: 
+      - minato-net
+
+volumes:
+  ollama_minato:
+
+networks:
+  minato-net:
+    driver: bridge
