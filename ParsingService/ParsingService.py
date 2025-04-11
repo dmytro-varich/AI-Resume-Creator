@@ -12,11 +12,10 @@ api = Api(app, version='1.0', title='GitHub User API', description='API to parse
 github_user_model = api.model('GitHubUser', {
     'GitHub': fields.String(description='GitHub username', required=True)
 })
-#123321
-#Refactoring!!!!
+
 # GitHub API URLs
 GITHUB_API_URL = "https://api.github.com/users/"
-GITHUB_API_URL_INTERNAL = "https://api.github.com/repos/"
+GITHUB_API_URL_REPOS = "https://api.github.com/repos/"
 
 # Resource for fetching user data from GitHub
 @api.route('/user')
@@ -115,7 +114,7 @@ def get_github_info(username: str) -> dict:
         project_name = item.get("name")
         
         # Fetch the programming languages used in each project
-        response_internal = requests.get(f'{GITHUB_API_URL_INTERNAL}{username}/{project_name}/languages')
+        response_internal = requests.get(f'{GITHUB_API_URL_REPOS}{username}/{project_name}/languages')
         response_internal.raise_for_status()
         project_languages = response_internal.json()
         
@@ -133,7 +132,7 @@ def get_github_info(username: str) -> dict:
         github_user_info["projects"].append(projects_filtered_data)
         
     # Print and save the final filtered user data into a JSON file
-    print(f'\n')
+    #print(f'\n')
     #with open("output.json", "w", encoding="utf-8") as f:
         #json.dump(github_user_info, f, ensure_ascii=False, indent=2)
     
