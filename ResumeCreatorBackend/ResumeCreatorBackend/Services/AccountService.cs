@@ -19,7 +19,7 @@ namespace ResumeCreatorBackend.Services
             _passwordHasher = new PasswordHasher<AccountModel>();
         }
 
-        public async Task<AccountModel> CreateAccountAsync(string email, string password)
+        public async Task<AccountModel> CreateAccountAsync(string name, string email, string password)
         {
 
             if(await GetAccountAsync(email) != null)
@@ -29,6 +29,7 @@ namespace ResumeCreatorBackend.Services
 
             var account = new AccountModel
             {
+                Name = name,
                 Email = email
             };
 

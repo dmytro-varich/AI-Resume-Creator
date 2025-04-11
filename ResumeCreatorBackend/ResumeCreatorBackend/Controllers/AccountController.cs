@@ -12,6 +12,9 @@ namespace ResumeCreatorBackend.Controllers
     public class CreateAccountTemp
     {
         [Required]
+        public string Name { get; set; }
+
+        [Required]
         [EmailAddress]
         public string Email { get; set; }
 
@@ -46,7 +49,7 @@ namespace ResumeCreatorBackend.Controllers
 
             try
             {
-                await _accountService.CreateAccountAsync(receivedModel.Email, receivedModel.Password);
+                await _accountService.CreateAccountAsync(receivedModel.Name, receivedModel.Email, receivedModel.Password);
                 return Ok("Account created successfully.");
             }
             catch(InvalidOperationException ex)

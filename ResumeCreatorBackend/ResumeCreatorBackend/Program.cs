@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ResumeCreatorBackend.Data;
 using ResumeCreatorBackend.Services;
+using ResumeCreatorBackend.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,14 +18,18 @@ builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<AICommunicationService>();
 builder.Services.AddScoped<ParserService>();
 
+
 // DbContext registration
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+    options.UseNpgsql(ConnectionStringHelper.GetPostgresConnectionStringFromEnv("EXTERNAL_DB_URL"))
 );
+
+builder.WebHost.UseUrls("http://0.0.0.0:8080");
 
 var app = builder.Build();
 
-// Apply pending migrations on startup
+// TO NOT TO FORGET TO UNCOMMENT THIS
+//Apply pending migrations on startup
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();

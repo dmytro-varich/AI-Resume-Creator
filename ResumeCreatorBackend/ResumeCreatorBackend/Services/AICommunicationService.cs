@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Text;
+using System.Text.Json;
 
 namespace ResumeCreatorBackend.Services
 {
@@ -9,6 +10,7 @@ namespace ResumeCreatorBackend.Services
         private const string _resumeSystemPrompt = "Use data from message and generate ONLY " +
                 "a latex template for a good IT resume and fill known resume " +
                 "data with given data from message. Do not generate anything else except latex code";
+        //private const string _resumeSystemPrompt = "";
 
         public AICommunicationService(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
@@ -17,18 +19,70 @@ namespace ResumeCreatorBackend.Services
 
         public string CreateDataPrompt(Dictionary<string, object> dataDictionary)
         {
-            var sb = new StringBuilder();
-            foreach (var kvp in dataDictionary)
+            string projectsString = dataDictionary["projects"].ToString();
+
+            // Deserialize the JSON string into a list of dictionaries.
+            List<Dictionary<string, JsonElement>> projects =
+                JsonSerializer.Deserialize<List<Dictionary<string, JsonElement>>>(projectsString);
+
+            // Create a dictionary keyed by project_name.
+            Dictionary<string, Dictionary<string, JsonElement>> projectDictionary =
+                new Dictionary<string, Dictionary<string, JsonElement>>();
+            foreach (var project in projects)
             {
-                if(kvp.Value != null)
+                // Get the project name from the JSON element.
+                string projectName = project["project_name"].GetString();
+                projectDictionary[projectName] = project;
+            }
+
+            // Initialize the concatenated projects string.
+            string dataConcat = "Relative keywords, skills and technologies: ";
+
+            // Process each project.
+            foreach (var project in projectDictionary.Values)
+            {
+                // Extract and append topics (array of strings).
+                if (project.ContainsKey("topics"))
                 {
-                    sb.Append($"{kvp.Key}:{kvp.Value.ToString()}, ");
+                    foreach (JsonElement topic in project["topics"].EnumerateArray())
+                    {
+                        // Append each topic followed by a space (or comma if preferred).
+                        dataConcat += topic.GetString() + ", ";
+                    }
+                }
+
+                // Extract and append language names from the languages object.
+                if (project.ContainsKey("languages"))
+                {
+                    foreach (JsonProperty lang in project["languages"].EnumerateObject())
+                    {
+                        // Append the language name (the property name) followed by a space.
+                        dataConcat += lang.Name + ", ";
+                    }
                 }
             }
 
-            string prompt = sb.ToString();
 
-            return prompt;
+            string profileString = dataDictionary["profile"].ToString();
+
+            // Deserialize the JSON string into a list of dictionaries.
+            Dictionary<string, string> values =
+                JsonSerializer.Deserialize<Dictionary<string, string>>(profileString);
+
+            if (values["name"] != null)
+            {
+                dataConcat += $"Name: {values["name"]}, ";
+            }
+
+            if (values["email"] != null)
+            {
+                dataConcat += $"Email: {values["email"]}, ";
+            }
+
+            // Optionally, trim the trailing whitespace.
+            dataConcat = dataConcat.Trim();
+
+            return dataConcat;
         }
 
         public async Task<HttpResponseMessage> SendRequestAsync(HttpClient client, string message, string modelName="mistral:latest", string systemPrompt = _resumeSystemPrompt)
