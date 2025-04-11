@@ -2,6 +2,7 @@
 from flask import Flask, jsonify, request
 from flask_restx import Api, Resource, fields
 import re
+
 #import json
 
 # Initialize Flask and Flask-RESTX
@@ -33,10 +34,16 @@ class GitHubUser(Resource):
             if not GitHub_Link:
                 return {'error': 'GitHub Link is required'}, 400
 
+            if not isinstance(GitHub_Link, str):
+                return {'error': 'GitHub field must be a string'}, 400
+
             # Extract the username from the GitHub URL
             username = get_github_username(GitHub_Link)
 
-            print(f"Requesting GitHub user data: {username}")
+            if not username:
+                return {'error': 'Invalid GitHub link format. Expected: https://github.com/<username>'}, 400
+            
+            #print(f"Requesting GitHub user data: {username}")
             # Fetch user data from GitHub
             user_data = get_github_info(username)
 
@@ -49,10 +56,19 @@ class GitHubUser(Resource):
 
             # Return the processed user data to the client
             return user_data
-
+        
+        except ValueError as ve:
+            return {'error': str(ve)}, 400
+        except requests.exceptions.HTTPError as http_err:
+            if http_err.response.status_code == 404:
+                return {'error': 'GitHub user not found'}, 404
+            elif http_err.response.status_code == 403 and \
+                    http_err.response.headers.get('X-RateLimit-Remaining') == '0':
+                return {'error': 'GitHub API rate limit exceeded'}, 403
+            else:
+                return {'error': f'HTTP error: {str(http_err)}'}, 400
         except requests.exceptions.RequestException as e:
-            # Handle request error (e.g., network issues or invalid responses)
-            print(f"Request error: {e}")
+            #print(f"Request error: {e}")
             return {'error': str(e)}, 400
 
 
@@ -70,6 +86,7 @@ def get_github_username(GitHub_Link: str) -> str:
        print(f"Extracted username: {username}")
     else:
        print("Failed to retrieve the username.")
+       return None
 
     print(f'\n Username: {username} \n GitHub Link: {GitHub_Link}')       
     return username
@@ -141,4 +158,4 @@ def get_github_info(username: str) -> dict:
 
 # Run the Flask app
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=False, host='0.0.0.0', port=5000)
