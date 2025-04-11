@@ -10,13 +10,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         texlive-latex-base \
         texlive-latex-extra \
-        texlive-latex-recommended \
-        texlive-fonts-recommended \
-        texlive-fonts-extra \
-        texlive-humanities \
-        texlive-pictures \
-        texlive-bibtex-extra \
-        texlive-xetex && \
+        texlive-fonts-recommended && \
     rm -rf /var/lib/apt/lists/*
 
 # Switch back to your application user.
