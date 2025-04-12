@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import CustomAlert from "./Alert";
+import { BsFiletypeHtml, BsFiletypeDocx, BsMarkdown  } from "react-icons/bs";
 
-const backendUrl = window.BACKEND_URL || "http://localhost:8000";
+
+const backendUrl =
+  "https://resumecreatorback-e8fzgxdpdpd7chaa.westeurope-01.azurewebsites.net";
 
 const Buttons = ({ linksRef, preferencesRef }) => {
   const [isAlertActive, setIsAlertActive] = useState(false);
@@ -92,7 +95,7 @@ const Buttons = ({ linksRef, preferencesRef }) => {
           method: "POST",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify({
-          // 'linkedInLink': formData.linkedin,
+            // 'linkedInLink': formData.linkedin,
             gitHubLink: formData.github,
             userPrompt: formData.preferences,
           }),
@@ -135,16 +138,59 @@ const Buttons = ({ linksRef, preferencesRef }) => {
   );
 };
 
-class DownloadButtons extends React.Component {
-  render() {
-    return (
-      <div className="download-buttons">
-        <button className="download-pdf">Download PDF</button>
-        <button className="download-formats">...</button>
-      </div>
-    );
-  }
-}
+const DownloadButtons = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleDownloadPDF = () => {
+    console.log("Download PDF button clicked");
+    // Add logic to download the PDF
+  };
+
+  return (
+    <div className="download-buttons">
+      <button className="download-pdf" onClick={handleDownloadPDF}>
+        Download PDF
+      </button>
+      <button className="download-formats" onClick={() => setIsOpen(!isOpen)}>
+        ...
+      </button>
+      {isOpen && (
+        <div
+          className="absolute right-5 top-20 w-56 h-35 drop-shadow-sm border rounded-lg shadow-md bg-[#d9d9d9] z-50"
+          ref={containerRef}
+        >
+          <button className="w-full gap-2 flex items-center py-2 px-3 text-red bg-[#1e1e1e] rounded-lg hover:bg-[#424242]">
+            <BsFiletypeDocx /> Export to DOCX
+          </button>
+          <button className="w-full gap-2 flex items-center py-2 px-3 text-white bg-[#1e1e1e] rounded-lg hover:bg-[#424242]">
+            <BsFiletypeHtml /> Export to HTML
+          </button>
+          <button className="w-full gap-2 flex items-center py-2 px-3 text-white bg-[#1e1e1e] rounded-lg hover:bg-[#424242]">
+            <BsMarkdown />
+            Export to Markdown
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default Buttons;
 export { DownloadButtons };

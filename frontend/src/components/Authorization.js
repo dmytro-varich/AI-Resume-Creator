@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, Checkbox, Button, Typography } from "@material-tailwind/react";
 import { SuccessAlert } from "./Alert";
 
-const backendUrl = window.BACKEND_URL || "http://localhost:8000";
+const backendUrl = "https://resumecreatorback-e8fzgxdpdpd7chaa.westeurope-01.azurewebsites.net";
 
 export function RegistrationForm({ onSkip, onSwitch }) {
   const [name, setName] = useState("");
@@ -33,7 +33,7 @@ export function RegistrationForm({ onSkip, onSwitch }) {
       newErrors.name = "Name is required.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
       newErrors.email = "Invalid email format.";
-    if (!password.trim()) newErrors.password = "Password is required.";
+    if (password.trim().length < 6) newErrors.password = "Password must be at least 6 symbols.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -42,7 +42,7 @@ export function RegistrationForm({ onSkip, onSwitch }) {
     e.preventDefault();
     if (validate()) {
       try {
-        const response = fetch(`${backendUrl}/api/Account/CreateAccountAsync`, {
+        const response = await fetch(`${backendUrl}/api/Account/CreateAccountAsync`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -55,16 +55,18 @@ export function RegistrationForm({ onSkip, onSwitch }) {
         });
         if (response.ok) {
           console.log("Account created successfully!");
-          localStorage.setItem("isAuthenticated", "true");
+          localStorage.setItem("user", JSON.stringify({ name, email }));
+          console.log("Account created and data saved to localStorage.");
           showAlert(
             "Account created successfully!",
             "You can now log in to your account."
           );
           setTimeout(() => {
-            onSkip(); 
+            onSkip();
           }, 1000);
         } else {
           console.error("Error creating account:", response.statusText);
+          console.log("Response:", (await response).json());
           setErrors((prev) => ({
             ...prev,
             email: "Email already exists.",
@@ -232,10 +234,16 @@ export function LoginForm({ onSkip, onSwitch }) {
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ name: "user", email, password }),
           }
         );
         if (response.ok) {
+          const userData = await response.json();
+          localStorage.setItem(
+            "user",
+            JSON.stringify({ name: userData.name, email: userData.email })
+          );
+
           showAlert("Login successful!", "Welcome back.");
           setTimeout(() => {
             onSkip();
@@ -344,7 +352,12 @@ export function LoginForm({ onSkip, onSwitch }) {
 }
 
 export function AuthorizationForm({ onSkip, onSwitch }) {
-  
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      onSkip();
+    }
+  }, [onSkip]);
   return (
     <Card className="bg-[#1e1e1e] rounded-2xl p-6 w-[380px] shadow-lg">
       <div className="flex flex-col items-center justify-between">

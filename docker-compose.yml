@@ -38,6 +38,19 @@ services:
     networks:
       - common_network
 
+  frontend:
+    build: ./frontend
+    container_name: appfrontend
+    ports: 
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: 
+      "on-failure:3"
+    networks: 
+      - common_network
+    environment:
+      - REACT_APP_BACKEND_URL=http://appbackend:8080
 
 volumes:
   postgres_data:
