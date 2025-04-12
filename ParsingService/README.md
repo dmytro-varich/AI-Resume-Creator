@@ -29,20 +29,20 @@
 
 ## 📗 **Description of service**📗 <a name="description-of-service"></a> 
 This project is a REST API that enables interaction with GitHub user data. Users can submit links to their GitHub profiles, and the API will return information about the user's profile and repositories.
-
+This service is hosted on port 5000."
 ---
 ## 🔧 **Technologies** 🔧 <a name="technologies"></a>
-- 🐍 **Python** — the main programming language used to implement the service logic.
+- 🐍 **Python** () — the main programming language used to implement the service logic.
     
-- 🧴 **Flask** — a web framework for building the REST API.
+- 🧴 **Flask** (2.0.1) — a web framework for building the REST API.
     
-- 🍾 **Flask-RESTX** — used for routing and automatic API documentation.
+- 🍾 **Flask-RESTX** (1.3.0) — used for routing and automatic API documentation.
     
 - 📦 **Docker** — for containerizing the application to simplify deployment.
     
 - ☁️ **GitHub API** — used to fetch user and repository data.
     
-- 🛠️ **Requests** — for sending HTTP requests to external services.
+- 🛠️ **Requests** (2.26.0) — for sending HTTP requests to external services.
 ---
 ## 🚀 **Key Features** 🚀 <a name="key-features"></a>
 - Retrieves user information including name, avatar, company, and location.
