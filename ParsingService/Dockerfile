@@ -1,16 +1,16 @@
-﻿# Используем официальный образ Python
+﻿# Use the official Python image
 FROM python:3.9-slim
 
-# Устанавливаем зависимости
+# Install dependencies
 WORKDIR /app
 COPY requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
 
-# Копируем исходный код
+# Copy the source code
 COPY . /app
 
-# Открываем порт 5000 для Flask-приложения
+# Expose port 5000 for the Flask application
 EXPOSE 5000
 
-# Запускаем приложение
+# Run the application
 CMD ["python", "ParsingService.py"]

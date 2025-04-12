@@ -1,0 +1,13 @@
+services: 
+  proxy-hinata:
+    container_name: proxy-hinata
+    image: nginx:stable-alpine-perl
+    ports: 
+      - 443:443
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/templates/nginx.conf.template
+    environment:
+      NGINX_ENVSUBST_OUTPUT_DIR: /etc/nginx
+      ENV_PROXY_PASS: #your environment proxy pass
+
