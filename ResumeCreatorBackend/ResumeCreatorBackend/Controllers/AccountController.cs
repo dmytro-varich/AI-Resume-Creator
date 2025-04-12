@@ -80,10 +80,12 @@ namespace ResumeCreatorBackend.Controllers
             {
                 if(await _accountService.VerifyPasswordByEmailAsync(receivedModel.Email, receivedModel.Password))
                 {
+                    var account = await _accountService.GetAccountAsync(receivedModel.Email);
+
                     Dictionary<string, string> returnValues = new Dictionary<string, string>()
                     {
-                        {"name", receivedModel.Name },
-                        {"email", receivedModel.Email }
+                        {"name", account.Name },
+                        {"email", account.Email }
                     };
 
                     return Ok(returnValues);
