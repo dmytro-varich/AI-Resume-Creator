@@ -1,7 +1,33 @@
 # 📃 ***ParsingService***  *Documentation* 📃
----
-## 📗 **Description** 📗
 
+---
+##  🗂️ **Table of Contents** 🗂️
+- [[#📗 **Description of service**📗]]
+- [[#🔧 **Technologies** 🔧]]
+- [[#🚀 **Key Features** 🚀]]
+- [[#🔄 **Processing Logic** 🔄]]
+- [[#✨ **Functionalities** ✨]]
+	- [[#🎈 `POST /user` —]]
+		- [[#📗 **Description** 📗]]
+		- [[#✍️ **Request Body** ✍️]]
+		- [[#📬 **Responses** 📬]]
+	- [[#🧩 `get_github_username` —]]
+		- [[#📗 **Description **📗]]
+		- [[#📥 Parameters]]
+		- [[#📤 Returns]]
+		- [[#⚙️ Internal Logic]]
+		- [[#⚠️ Notes]]
+	- [[#🧠 `get_github_info` —]]
+		- [[#📗 **Description** 📗]]
+		- [[#📥 Parameters]]
+		- [[#📤 Returns]]
+		- [[#⚠️ Exceptions]]
+- [[#⛔ **Error Handling** ⛔]]
+	- [[#🔧 Where Implemented?]]
+	- [[#🛡️ Exceptions Being Handled 🛡️]]
+---
+
+## 📗 **Description of service**📗
 This project is a REST API that enables interaction with GitHub user data. Users can submit links to their GitHub profiles, and the API will return information about the user's profile and repositories.
 
 ---
@@ -31,18 +57,6 @@ This project is a REST API that enables interaction with GitHub user data. Users
 
 ---
 
-### `/user` — Get GitHub User Information
-
-#### Method: `POST`
-#### Description:
-Accepts a GitHub profile URL and returns information about the user as well as their repositories.
-
-#### 📥 Request Parameters 📥
-```json
-{
-  "GitHub": "https://github.com/username"
-}
-````
 ## ✨ **Functionalities** ✨
 ### 🎈 `POST /user` —
 #### 📗 **Description** 📗 
