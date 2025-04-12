@@ -13,6 +13,8 @@ RUN apt-get update && \
         texlive-fonts-recommended && \
     rm -rf /var/lib/apt/lists/*
 
+
+
 # Switch back to your application user.
 USER $APP_UID
 WORKDIR /app

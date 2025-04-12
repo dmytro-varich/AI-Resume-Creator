@@ -45,8 +45,10 @@ namespace ResumeCreatorBackend.Controllers
         }
 
         [HttpPost("CreateTestResume")]
-        public async Task<IActionResult> CreateTest(string resultContent)
+        public async Task<IActionResult> CreateTest([FromBody] Dictionary<string, string> receivedData)
         {
+            string resultContent = receivedData["resultContent"];
+
             //string pattern = @"```latex\s*(.*?)\s*```";
             string pattern = @"(?<=```latex\s)(.*?)(?=\s```)";
             var match = Regex.Match(resultContent, pattern, RegexOptions.Singleline);
@@ -59,6 +61,9 @@ namespace ResumeCreatorBackend.Controllers
             // Extract the LaTeX code from the first capturing group.
             string latexCode = match.Groups[1].Value;
             latexCode = latexCode.Replace("%", "");
+            latexCode = latexCode.Replace("\\usepackage{margin}", "");
+            latexCode = latexCode.Replace("\\usepackage{moderncv}", "");
+
             //Console.WriteLine("Extracted LaTeX code:");
             Console.WriteLine(latexCode);
 
@@ -188,15 +193,15 @@ namespace ResumeCreatorBackend.Controllers
                 string latexCode = match.Groups[1].Value;
                 latexCode = latexCode.Replace("%", "");
                 latexCode = latexCode.Replace("\\usepackage{margin}", "");
+                latexCode = latexCode.Replace("\\usepackage{moderncv}", "");
                 //Console.WriteLine("Extracted LaTeX code:");
                 Console.WriteLine(latexCode);
 
-                // Step 2: Write the extracted LaTeX code to a .tex file.
+                // Write the extracted LaTeX code to a .tex file.
                 string texFilePath = "resume.tex";
                 System.IO.File.WriteAllText(texFilePath, latexCode);
                 Console.WriteLine($"LaTeX code written to {texFilePath}");
 
-                // Step 3: Use pdflatex to compile the .tex file into a PDF.
                 // Ensure that 'pdflatex' is installed and available in the system PATH.
                 ProcessStartInfo processInfo = new ProcessStartInfo
                 {
