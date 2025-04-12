@@ -2,29 +2,29 @@
 
 ---
 ##  🗂️ **Table of Contents** 🗂️
-- [[#📗 **Description of service**📗]]
-- [[#🔧 **Technologies** 🔧]]
-- [[#🚀 **Key Features** 🚀]]
-- [[#🔄 **Processing Logic** 🔄]]
-- [[#✨ **Functionalities** ✨]]
-	- [[#🎈 `POST /user` —]]
-		- [[#📗 **Description** 📗]]
-		- [[#✍️ **Request Body** ✍️]]
-		- [[#📬 **Responses** 📬]]
-	- [[#🧩 `get_github_username` —]]
-		- [[#📗 **Description **📗]]
-		- [[#📥 Parameters]]
-		- [[#📤 Returns]]
-		- [[#⚙️ Internal Logic]]
-		- [[#⚠️ Notes]]
-	- [[#🧠 `get_github_info` —]]
-		- [[#📗 **Description** 📗]]
-		- [[#📥 Parameters]]
-		- [[#📤 Returns]]
-		- [[#⚠️ Exceptions]]
-- [[#⛔ **Error Handling** ⛔]]
-	- [[#🔧 Where Implemented?]]
-	- [[#🛡️ Exceptions Being Handled 🛡️]]
+- [📗 **Description of service** 📗](#📗-description-of-service📗)
+- [🔧 **Technologies** 🔧](#🔧-technologies-🔧)
+- [🚀 **Key Features** 🚀](#🚀-key-features-🚀)
+- [🔄 **Processing Logic** 🔄](#🔄-processing-logic-🔄)
+- [✨ **Functionalities** ✨](#✨-functionalities-✨)
+  - [🎈 `POST /user` —](#🎈-post-user-)
+    - [📗 **Description** 📗](#📗-description-📗)
+    - [✍️ **Request Body** ✍️](#✍️-request-body-✍️)
+    - [📬 **Responses** 📬](#📬-responses-📬)
+  - [🧩 `get_github_username` —](#🧩-get-github-username-)
+    - [📗 **Description** 📗](#📗-description-📗)
+    - [📥 Parameters](#📥-parameters)
+    - [📤 Returns](#📤-returns)
+    - [⚙️ Internal Logic](#⚙️-internal-logic)
+    - [⚠️ Notes](#⚠️-notes)
+  - [🧠 `get_github_info` —](#🧠-get-github-info-)
+    - [📗 **Description** 📗](#📗-description-📗)
+    - [📥 Parameters](#📥-parameters)
+    - [📤 Returns](#📤-returns)
+    - [⚠️ Exceptions](#⚠️-exceptions)
+- [⛔ **Error Handling** ⛔](#⛔-error-handling-⛔)
+  - [🔧 Where Implemented?](#🔧-where-implemented)
+  - [🛡️ Exceptions Being Handled 🛡️](#🛡️-exceptions-being-handled-🛡️)
 ---
 
 ## 📗 **Description of service**📗
