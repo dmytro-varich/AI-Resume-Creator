@@ -157,7 +157,7 @@ namespace ResumeCreatorBackend.Controllers
             };
 
             // Get data from the parser  
-            HttpResponseMessage response = await client.PostAsJsonAsync("http://parser:5000/user", resourcesLinks);
+            HttpResponseMessage response = await client.PostAsJsonAsync($"{Environment.GetEnvironmentVariable("PARSER_URL")}/user", resourcesLinks);
             response.EnsureSuccessStatusCode();
 
             Dictionary<string, object> resultObjects = await response.Content.ReadFromJsonAsync<Dictionary<string, object>>();

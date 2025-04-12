@@ -80,7 +80,13 @@ namespace ResumeCreatorBackend.Controllers
             {
                 if(await _accountService.VerifyPasswordByEmailAsync(receivedModel.Email, receivedModel.Password))
                 {
-                    return Ok("Password is correct.");
+                    Dictionary<string, string> returnValues = new Dictionary<string, string>()
+                    {
+                        {"name", receivedModel.Name },
+                        {"email", receivedModel.Email }
+                    };
+
+                    return Ok(returnValues);
                 }
                 return Unauthorized("Password is invalid.");
             }
