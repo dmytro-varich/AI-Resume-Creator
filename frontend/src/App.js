@@ -55,7 +55,12 @@ class App extends React.Component {
   render() {
     return (
       <div className="relative min-h-screen">
-        <ResumeForm />
+        <ResumeForm
+          onSwitchView={this.handleSwitchView}
+          onSkip={this.handleSkip}
+          onLoginClick={() => this.handleSwitchView("login")}
+          onRegisterClick={() => this.handleSwitchView("register")}
+        />
         <Visualisation />
 
         {this.state.authView && (

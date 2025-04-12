@@ -8,18 +8,25 @@ import Buttons from "./Buttons";
 class ResumeForm extends React.Component {
   constructor(props) {
     super(props);
-      this.linksRef = createRef(); 
-      this.preferencesRef = createRef();
+    this.linksRef = createRef();
+    this.preferencesRef = createRef();
   }
-
+  
   render() {
+    const { onLoginClick, onRegisterClick } = this.props;
     return (
       <div className="resume-form">
-        <Account />
+        <Account
+          onLoginClick={onLoginClick} 
+          onRegisterClick={onRegisterClick}
+        />
         <Header />
         <Links ref={this.linksRef} />
         <Preferences ref={this.preferencesRef} />
-        <Buttons linksRef={this.linksRef} preferencesRef={this.preferencesRef} />
+        <Buttons
+          linksRef={this.linksRef}
+          preferencesRef={this.preferencesRef}
+        />
       </div>
     );
   }
