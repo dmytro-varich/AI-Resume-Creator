@@ -64,6 +64,7 @@ export function RegistrationForm({ onSkip, onSwitch }) {
           setTimeout(() => {
             onSkip();
           }, 1000);
+          window.location.reload();
         } else {
           console.error("Error creating account:", response.statusText);
           console.log("Response:", (await response).json());
@@ -248,6 +249,7 @@ export function LoginForm({ onSkip, onSwitch }) {
           setTimeout(() => {
             onSkip();
           }, 1000);
+          window.location.reload();
         } else {
           const result = await response.json();
           setErrors((prev) => ({

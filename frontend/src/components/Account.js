@@ -36,6 +36,7 @@ const Account = ( {onLoginClick, onRegisterClick}) => {
     setIsOpen(false);
     window.location.reload(); // Reload the page to reflect the changes
   };
+  console.log("User:", user);
   if (!user) {
     return (
       <div className="flex gap-4 h-15 pt-5 pb-5 justify-end mr-4">
@@ -70,10 +71,10 @@ const Account = ( {onLoginClick, onRegisterClick}) => {
           <>
             <div className="mb-2">
               <p className="text-white pl-3 mt-2 mb-0 text-lg]">
-                user.name
+                {user.name}
               </p>
               <p className="text-[#808080] ml-3 text-sm">
-                user.email
+                {user.email}
               </p>
               <hr className="w-[90%] mx-3 items-center border-[#424242]"></hr>
             </div>

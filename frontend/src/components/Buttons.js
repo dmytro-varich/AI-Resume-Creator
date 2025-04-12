@@ -3,8 +3,7 @@ import CustomAlert from "./Alert";
 import { BsFiletypeHtml, BsFiletypeDocx, BsMarkdown  } from "react-icons/bs";
 
 
-const backendUrl =
-  "https://resumecreatorback-e8fzgxdpdpd7chaa.westeurope-01.azurewebsites.net";
+const backendUrl = "https://resumecreatorback-e8fzgxdpdpd7chaa.westeurope-01.azurewebsites.net";
 
 const Buttons = ({ linksRef, preferencesRef }) => {
   const [isAlertActive, setIsAlertActive] = useState(false);
@@ -102,7 +101,6 @@ const Buttons = ({ linksRef, preferencesRef }) => {
         }
       );
 
-      // How I can to recieve this response?
       // Need to check if those links are valid for profile parsing
       const result = await response.json();
       console.log("Resume generated successfully:", result);
