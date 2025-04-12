@@ -10,7 +10,7 @@
   - [🎈 `POST /user` —](#🎈-post-user-)
     - [📗 **Description** 📗](#📗-description-📗)
     - [✍️ **Request Body** ✍️](#✍️-request-body-✍️)
-    - [📬 **Responses** 📬](#📬-responses-📬)
+    - [📬 **Responses** 📬](#-responses-)
   - [🧩 `get_github_username` —](#🧩-get-github-username-)
     - [📗 **Description** 📗](#📗-description-📗)
     - [📥 Parameters](#📥-parameters)
