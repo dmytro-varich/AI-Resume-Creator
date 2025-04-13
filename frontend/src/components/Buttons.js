@@ -2,8 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import CustomAlert from "./Alert";
 import { BsFiletypeHtml, BsFiletypeDocx, BsMarkdown } from "react-icons/bs";
 
-const backendUrl =
-  "https://resumecreatorback-e8fzgxdpdpd7chaa.westeurope-01.azurewebsites.net";
+const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
 
 const Buttons = ({ linksRef, preferencesRef, setPdfBlob, resetPreferences, setIsLoading }) => {
   const [isAlertActive, setIsAlertActive] = useState(false);
