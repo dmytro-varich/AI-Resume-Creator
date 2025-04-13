@@ -1,9 +1,18 @@
 # 📝 AI Resume Creator
 
 ![AI-RESUME-CREATOR](https://github.com/user-attachments/assets/22922ad6-a2c4-4f16-9409-380ba0dbcef1)
-.....
-.....
-....
+
+
+This is a full-stack web application that **parses data from a given GitHub profile** and uses an **AI Chat** to generate a **pdf resume**.
+
+## 🚀 Features
+
+- 🔗 **GitHub Integration**: Input a GitHub link and extract relevant user data (repos, technologies, languages).
+- 🧾 **Parsing Service**: A backend service that parses and transforms GitHub data into structured format for resume generation.
+- 💬 **AI Chat Service**: A backend service that receives formatted user data and generates latex code for a resume.
+- 🖥️ **Frontend**: Fancy UI to input GitHub URL, interact with AI, and view LaTeX output.
+- 🔙 **Backend API**: Handles routing, logic, latext to pdf compilation, and inter-service communication.
+- 🗂️ **Database**: Stores account data.
 
 # 💻 Stack 
 ![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white)
@@ -28,9 +37,9 @@
 | Name                  | Role      | Description                  |
 |-----------------------|-----------|------------------------------|
 | **Dmytro Varich**         | `Frontend`  | Works on the user interface and user experience design. |
-| **Ivan Tkachenko**        | `Backend`   | Responsible for server-side logic and database management. |
+| **Ivan Tkachenko**        | `Backend`   | Responsible for server-side logic, inter-service communication and database management. |
 | **Nikita Pohorilyi**      | `Parsing`   | Specializes in extracting and processing data from various sources. |
-| **Arsenii Milenchuk**     | `AI`        | Focuses on machine learning and AI model development. |
+| **Arsenii Milenchuk**     | `AI`        | Focuses on development of a convenient AI Chat service. |
 
 
 # 🎥 Demo Video
