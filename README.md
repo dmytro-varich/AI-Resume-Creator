@@ -14,7 +14,7 @@ This is a full-stack web application that **parses data from a given GitHub prof
 - 🔙 **Backend API**: Handles routing, logic, latext to pdf compilation, and inter-service communication.
 - 🗂️ **Database**: Stores account data.
 
-# 💻 Stack 
+# 💻 Stack and Individual Services
 ![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![HTML](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white)
@@ -32,6 +32,22 @@ This is a full-stack web application that **parses data from a given GitHub prof
 ![Ollama](https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white)
 ![Figma](https://img.shields.io/badge/Figma-000000?style=for-the-badge&logo=figma&logoColor=white)
 ![Canva](https://img.shields.io/badge/Canva-00C4CC?style=for-the-badge&logo=canva&logoColor=white)
+
+## Frontend
+
+
+## Backend & Database
+⚫ **`C# with ASP.NET Core`** because it provides a robust, high-performance, object-oriented framework for building scalable and secure web APIs.  
+⚫ **`Entity Framework Core`** for ORM and database migrations because it seamlessly integrates with C#, simplifies data access, and supports code-first development.  
+⚫ **`PostgreSQL`** was selected as the database because of the convenience of hosting it for free on Neon.  
+⚫ **`OpenAPI (Swagger)`** to provide automatic API documentation and testing tools.  
+⚫ **`Pdflatex`** was used as the LaTeX compiler to enable the generation of PDF files from LaTeX code.  
+
+
+## AI API
+
+
+## Parser
 
 # 👥 Team
 | Name                  | Role      | Description                  |
