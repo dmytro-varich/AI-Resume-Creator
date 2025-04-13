@@ -48,10 +48,10 @@ This is a full-stack web application that **parses data from a given GitHub prof
 
 
 ## AI API
-⚫ **`FastAPI`** fast, Python:), asynchronous, automatic documentation generation by Swagger.
-⚫ **`Ollama`** interface for interaction with language models, a large library of models and a sufficient number of model usage settings.
-⚫ **`Nginx`** default and popularity for make proxy on server, fast and integrated load balancer.
-All this can be set up using docker-compose. The proxy is not really a necessary part for IP access. It was necessary because the server 
+⚫ **`FastAPI`** fast, Python:), asynchronous, automatic documentation generation by Swagger.  
+⚫ **`Ollama`** interface for interaction with language models, a large library of models and a sufficient number of model usage settings.  
+⚫ **`Nginx`** default and popularity for make proxy on server, fast and integrated load balancer.  
+All this can be set up using docker-compose. The proxy is not really a necessary part for IP access. It was necessary because the server
 where the video card was located was on the university network that using VPN, and for access we needed another server that could process an 
 external request and pass it on to our server on the university network, since we added it to VPN network.
 
