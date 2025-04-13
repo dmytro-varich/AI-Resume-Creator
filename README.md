@@ -53,20 +53,19 @@ This is a full-stack web application that **parses data from a given GitHub prof
 # 🏗️ Architecture Diagram
 ![Alt text](Assets/ResumeCreatorArchitecture.png)
 
+
 # 👥 Team
 | Name                  | Role      | Description                  |
 |-----------------------|-----------|------------------------------|
 | **Dmytro Varich**         | `Frontend`  | Works on the user interface and user experience design. |
-| **Ivan Tkachenko**        | `Backend`   | Responsible for server-side logic, inter-service communication and database management. |
-| **Nikita Pohorilyi**      | `Parsing`   | Specializes in extracting and processing data from various sources. |
-| **Arsenii Milenchuk**     | `AI`        | Focuses on development of a convenient AI Chat service. |
+| **Ivan Tkachenko**        | `Backend & DB`   | Responsible for server-side logic, inter-service communication and database management. |
+| **Nikita Pohorilyi**      | `Parsing Service`   | Specializes in extracting and processing data from various sources. |
+| **Arsenii Milenchuk**     | `AI Service`        | Focuses on development of a convenient AI Chat service. |
 
 
-# 🎥 Demo Video
-...
-
-# 🐳 Usage
-...
-
-# 🌐 Deployment
-...
+# 🐳 How to Use
+- Head to the home page (future link).
+- Create a new account or continue without registration.
+- Give your GitHub profile URL.
+- (Optional) Write additional brief information about yourself. Recommended format - (Name: John, Surname: Smith, Job: Backend Developer, University: TUKE).
+- Send data for processing and wait for your resume to be created.
