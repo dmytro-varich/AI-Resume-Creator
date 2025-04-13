@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import { Card, Checkbox, Button, Typography } from "@material-tailwind/react";
 import { SuccessAlert } from "./Alert";
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
+// const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
+const backendUrl =
+  "https://resumecreatorback-e8fzgxdpdpd7chaa.westeurope-01.azurewebsites.net"; 
+
 
 export function RegistrationForm({ onSkip, onSwitch }) {
   const [name, setName] = useState("");
