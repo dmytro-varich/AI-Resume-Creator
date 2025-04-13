@@ -13,6 +13,7 @@ class App extends React.Component {
       authView: "authorization",
       pdfBlob: null,
       preferencesKey: 0,
+      isLoading: false,
     };
   }
 
@@ -22,6 +23,20 @@ class App extends React.Component {
 
   handleSwitchView = (view) => {
     this.setState({ authView: view });
+  };
+
+  setPdfBlob = (blob) => {
+    this.setState({ pdfBlob: blob });
+  };
+
+  setIsLoading = (value) => {
+    this.setState({ isLoading: value });
+  };
+
+  resetPreferences = () => {
+    this.setState((prevState) => ({
+      preferencesKey: prevState.preferencesKey + 1,
+    }));
   };
 
   renderAuthForm() {
@@ -54,19 +69,9 @@ class App extends React.Component {
     }
   }
 
-  setPdfBlob = (blob) => {
-    this.setState({ pdfBlob: blob });
-  };
-
-  resetPreferences = () => {
-    this.setState((prevState) => ({
-      preferencesKey: prevState.preferencesKey + 1,
-    }));
-  };
-
   render() {
     const { pdfBlob } = this.state;
-
+    const { isLoading } = this.state;
     return (
       <div className="relative min-h-screen">
         <ResumeForm
@@ -75,10 +80,11 @@ class App extends React.Component {
           onLoginClick={() => this.handleSwitchView("login")}
           onRegisterClick={() => this.handleSwitchView("register")}
           setPdfBlob={this.setPdfBlob}
+          setIsLoading={this.setIsLoading}
           preferencesKey={this.state.preferencesKey}
           resetPreferences={this.resetPreferences}
         />
-        <Visualisation pdfBlob={pdfBlob} />
+        <Visualisation pdfBlob={pdfBlob} isLoading={isLoading} />
 
         {this.state.authView && (
           <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">

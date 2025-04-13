@@ -4,12 +4,12 @@ import Resume from './Resume';
 
 class Visualisation extends React.Component {
   render() {
-    const { pdfBlob } = this.props;
+    const { pdfBlob, isLoading } = this.props;
 
     return (
       <div className="resume-visualization">
         <DownloadButtons pdfBlob={pdfBlob} />
-        <Resume pdfBlob={pdfBlob} />
+        <Resume pdfBlob={pdfBlob} isLoading={isLoading} />
       </div>
     );
   }

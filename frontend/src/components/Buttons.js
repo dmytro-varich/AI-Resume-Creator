@@ -5,7 +5,7 @@ import { BsFiletypeHtml, BsFiletypeDocx, BsMarkdown } from "react-icons/bs";
 const backendUrl =
   "https://resumecreatorback-e8fzgxdpdpd7chaa.westeurope-01.azurewebsites.net";
 
-const Buttons = ({ linksRef, preferencesRef, setPdfBlob, resetPreferences }) => {
+const Buttons = ({ linksRef, preferencesRef, setPdfBlob, resetPreferences, setIsLoading }) => {
   const [isAlertActive, setIsAlertActive] = useState(false);
   const [alertTitleMessage, setAlertTitleMessage] = useState(null);
   const [alertDescMessage, setAlertDescMessage] = useState(null);
@@ -88,6 +88,7 @@ const Buttons = ({ linksRef, preferencesRef, setPdfBlob, resetPreferences }) => 
     }
 
     try {
+      setIsLoading(true);
       const response = await fetch(
         `${backendUrl}/api/ResumeCreator/CreateResumeFromResources`,
         {
@@ -115,10 +116,12 @@ const Buttons = ({ linksRef, preferencesRef, setPdfBlob, resetPreferences }) => 
           "Generate Resume Error",
           "An error occurred while generating the resume. Please try again later. Make sure the link you provided matches your actual LinkedIn or GitHub profile URL."
         );
+        setIsLoading(false);
         return;
       } else {
         const blob = await response.blob();
         setPdfBlob(blob);
+        setIsLoading(false);
         console.log("Resume generated successfully!");
       }
     } catch (error) {

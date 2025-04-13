@@ -28,6 +28,7 @@ class ResumeForm extends React.Component {
           linksRef={this.linksRef}
           preferencesRef={this.preferencesRef}
           setPdfBlob={this.props.setPdfBlob}
+          setIsLoading={this.props.setIsLoading}
           resetPreferences={resetPreferences}
         />
       </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf";
 
-const Resume = ({ pdfBlob }) => {
+const Resume = ({ pdfBlob, isLoading }) => {
   const [pdf, setPdf] = useState(null);
   const [pageNum, setPageNum] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -25,7 +25,6 @@ const Resume = ({ pdfBlob }) => {
   useEffect(() => {
     const renderPage = async () => {
       if (!pdf) return;
-
       const page = await pdf.getPage(pageNum);
       const viewport = page.getViewport({ scale: 1 });
       const canvas = canvasRef.current;
@@ -58,14 +57,21 @@ const Resume = ({ pdfBlob }) => {
 
   return (
     <div className="resume-container">
-      <div className="resume-preview">
-        <canvas ref={canvasRef}></canvas>
+      <div className="resume-preview relative">
+        {isLoading && (
+          <div className="absolute inset-0 bg-white/80 flex flex-col items-center justify-center z-10 rounded-md">
+            <div className="w-8 h-8 border-4 border-gray-300 border-t-white rounded-full animate-spin mb-2" />
+            <p className="text-gray-600 text-sm">Loading...</p>
+          </div>
+        )}
+        <canvas
+          ref={canvasRef}
+          style={{ visibility: isLoading ? "hidden" : "visible" }}
+        ></canvas>
       </div>
       <div className="page-switcher">
         <div
-          className={`switch-left ${
-            pageNum > 1 ? "can-go-next" : "no-more-pages"
-          }`}
+          className="switch-left"
           onClick={handlePrevPage}
         >
           <svg
@@ -83,13 +89,11 @@ const Resume = ({ pdfBlob }) => {
         </div>
 
         <div className="page-indicator">
-          {pageNum} / {totalPages === 0 ? totalPages + 1 : totalPages}
+          {pageNum} / {totalPages === 0 || isLoading ? totalPages + 1 : totalPages}
         </div>
 
         <div
-          className={`switch-right ${
-            pageNum < totalPages ? "can-go-next" : "no-more-pages"
-          }`}
+          className="switch-right"
           onClick={handleNextPage}
         >
           <svg
