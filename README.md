@@ -52,6 +52,14 @@ This is a full-stack web application that **parses data from a given GitHub prof
 
 ## Parser
 
+- 🐍 **Python** — because of its simplicity, which allows fast code development, testing, and because of the availability of libraries.    
+- 🧴 **Flask** — a web framework for building the REST API.   
+- 🍾 **Flask-RESTX** — used for routing and automatic API documentation.
+- 🍃 **OpenAPI** — to provide automatic API documentation and testing tools.      
+- 📦 **Docker** — for containerizing the application to simplify deployment.    
+- ☁️ **GitHub API** — used to fetch user and repository data.   
+- 🛠️ **Requests** — for sending HTTP requests to external services.
+---
 
 # 🏗️ Architecture Diagram
 ![Alt text](Assets/ResumeCreatorArchitecture.png)
