@@ -6,6 +6,7 @@ const Preferences = forwardRef((props, ref) => {
     <div className="preferences-container">
       <h2>Preferences</h2>
       <TextareaAutosize
+        key={props.preferencesKey}
         ref={ref}
         minRows={1}
         placeholder="Describe any additional details..."

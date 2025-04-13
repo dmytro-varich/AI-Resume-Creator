@@ -13,19 +13,22 @@ class ResumeForm extends React.Component {
   }
   
   render() {
-    const { onLoginClick, onRegisterClick } = this.props;
+    const { onLoginClick, onRegisterClick, preferencesKey, resetPreferences } =
+      this.props;
     return (
       <div className="resume-form">
         <Account
-          onLoginClick={onLoginClick} 
+          onLoginClick={onLoginClick}
           onRegisterClick={onRegisterClick}
         />
         <Header />
         <Links ref={this.linksRef} />
-        <Preferences ref={this.preferencesRef} />
+        <Preferences ref={this.preferencesRef} key={preferencesKey} />
         <Buttons
           linksRef={this.linksRef}
           preferencesRef={this.preferencesRef}
+          setPdfBlob={this.props.setPdfBlob}
+          resetPreferences={resetPreferences}
         />
       </div>
     );

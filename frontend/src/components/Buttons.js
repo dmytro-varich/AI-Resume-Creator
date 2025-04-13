@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import CustomAlert from "./Alert";
-import { BsFiletypeHtml, BsFiletypeDocx, BsMarkdown  } from "react-icons/bs";
+import { BsFiletypeHtml, BsFiletypeDocx, BsMarkdown } from "react-icons/bs";
 
+const backendUrl =
+  "https://resumecreatorback-e8fzgxdpdpd7chaa.westeurope-01.azurewebsites.net";
 
-const backendUrl = "https://resumecreatorback-e8fzgxdpdpd7chaa.westeurope-01.azurewebsites.net";
-
-const Buttons = ({ linksRef, preferencesRef }) => {
+const Buttons = ({ linksRef, preferencesRef, setPdfBlob, resetPreferences }) => {
   const [isAlertActive, setIsAlertActive] = useState(false);
   const [alertTitleMessage, setAlertTitleMessage] = useState(null);
   const [alertDescMessage, setAlertDescMessage] = useState(null);
@@ -100,10 +100,27 @@ const Buttons = ({ linksRef, preferencesRef }) => {
           }),
         }
       );
-
-      // Need to check if those links are valid for profile parsing
-      const result = await response.json();
-      console.log("Resume generated successfully:", result);
+      // const response = await fetch(
+      //   `${backendUrl}/api/ResumeCreator/CreateTestResume`,
+      //   {
+      //     method: "POST",
+      //     headers: { "Content-type": "application/json" },
+      //     body: JSON.stringify({ resultContent: formData.preferences }),
+      //   }
+      // );
+      console.log("Response:", response);
+      if (!response.ok) {
+        console.error("Error generating resume:", response.statusText);
+        showAlert(
+          "Generate Resume Error",
+          "An error occurred while generating the resume. Please try again later. Make sure the link you provided matches your actual LinkedIn or GitHub profile URL."
+        );
+        return;
+      } else {
+        const blob = await response.blob();
+        setPdfBlob(blob);
+        console.log("Resume generated successfully!");
+      }
     } catch (error) {
       console.error("Error generating resume:", error);
     }
@@ -113,7 +130,12 @@ const Buttons = ({ linksRef, preferencesRef }) => {
     console.log("Reset Parameters button clicked");
     linksRef.current.linkedin.value = "";
     linksRef.current.github.value = "";
-    preferencesRef.current.value = "";
+
+    if (preferencesRef.current) {
+      preferencesRef.current.value = "";
+    }
+
+    resetPreferences(); 
   };
 
   return (
@@ -136,7 +158,7 @@ const Buttons = ({ linksRef, preferencesRef }) => {
   );
 };
 
-const DownloadButtons = () => {
+const DownloadButtons = ({ pdfBlob }) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
 
@@ -158,7 +180,20 @@ const DownloadButtons = () => {
 
   const handleDownloadPDF = () => {
     console.log("Download PDF button clicked");
-    // Add logic to download the PDF
+    if (!pdfBlob) {
+      console.warn("PDF blob not available yet.");
+      return;
+    }
+
+    const url = URL.createObjectURL(pdfBlob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url); // Clean up the URL object
+    console.log("PDF downloaded successfully!");
   };
 
   return (

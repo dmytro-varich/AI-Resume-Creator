@@ -10,7 +10,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      authView: "authorization", // 'authorization' | 'register' | 'login' | null
+      authView: "authorization",
+      pdfBlob: null,
+      preferencesKey: 0,
     };
   }
 
@@ -52,7 +54,19 @@ class App extends React.Component {
     }
   }
 
+  setPdfBlob = (blob) => {
+    this.setState({ pdfBlob: blob });
+  };
+
+  resetPreferences = () => {
+    this.setState((prevState) => ({
+      preferencesKey: prevState.preferencesKey + 1,
+    }));
+  };
+
   render() {
+    const { pdfBlob } = this.state;
+
     return (
       <div className="relative min-h-screen">
         <ResumeForm
@@ -60,8 +74,11 @@ class App extends React.Component {
           onSkip={this.handleSkip}
           onLoginClick={() => this.handleSwitchView("login")}
           onRegisterClick={() => this.handleSwitchView("register")}
+          setPdfBlob={this.setPdfBlob}
+          preferencesKey={this.state.preferencesKey}
+          resetPreferences={this.resetPreferences}
         />
-        <Visualisation />
+        <Visualisation pdfBlob={pdfBlob} />
 
         {this.state.authView && (
           <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
