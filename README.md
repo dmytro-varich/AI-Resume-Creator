@@ -49,6 +49,10 @@ This is a full-stack web application that **parses data from a given GitHub prof
 
 ## Parser
 
+
+# 🏗️ Architecture Diagram
+![Alt text](Assets/ResumeCreatorArchitecture.png)
+
 # 👥 Team
 | Name                  | Role      | Description                  |
 |-----------------------|-----------|------------------------------|
