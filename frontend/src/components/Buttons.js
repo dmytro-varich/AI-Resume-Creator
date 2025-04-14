@@ -11,6 +11,7 @@ const Buttons = ({ linksRef, preferencesRef, setPdfBlob, resetPreferences, setIs
   const [alertTitleMessage, setAlertTitleMessage] = useState(null);
   const [alertDescMessage, setAlertDescMessage] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [previousData, setpreviousData] = useState(null);
 
   // function to set alert message and visibility
   const showAlert = (title, description) => {
@@ -88,6 +89,12 @@ const Buttons = ({ linksRef, preferencesRef, setPdfBlob, resetPreferences, setIs
       return;
     }
 
+    if (previousData && JSON.stringify(previousData) === JSON.stringify(formData)) {
+      console.log("No changes detected in form data. Skipping resume generation.");
+      return;
+    }
+    setpreviousData(formData);
+
     try {
       setIsLoading(true);
       const response = await fetch(
@@ -140,6 +147,7 @@ const Buttons = ({ linksRef, preferencesRef, setPdfBlob, resetPreferences, setIs
     }
 
     resetPreferences(); 
+    setpreviousData(null);
   };
 
   return (
