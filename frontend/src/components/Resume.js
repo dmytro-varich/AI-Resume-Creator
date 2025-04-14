@@ -4,7 +4,7 @@ import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf";
 const Resume = ({ pdfBlob, isLoading }) => {
   const [pdf, setPdf] = useState(null);
   const [pageNum, setPageNum] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -70,10 +70,7 @@ const Resume = ({ pdfBlob, isLoading }) => {
         ></canvas>
       </div>
       <div className="page-switcher">
-        <div
-          className="switch-left"
-          onClick={handlePrevPage}
-        >
+        <div className="switch-left" onClick={handlePrevPage}>
           <svg
             width="24"
             height="24"
@@ -89,13 +86,10 @@ const Resume = ({ pdfBlob, isLoading }) => {
         </div>
 
         <div className="page-indicator">
-          {pageNum} / {totalPages === 0 || isLoading ? totalPages + 1 : totalPages}
+          {pageNum} / {isLoading ? 1 : totalPages}
         </div>
 
-        <div
-          className="switch-right"
-          onClick={handleNextPage}
-        >
+        <div className="switch-right" onClick={handleNextPage}>
           <svg
             width="24"
             height="24"

@@ -117,7 +117,7 @@
     border-radius: 30px;
     padding: 10px 20px;
     color: white;
-    width: 74%;
+    width: 80%;
   }
 
   .links-container input:focus {
@@ -140,7 +140,7 @@
     border-color: rgb(66, 66, 66);
     padding: 15px 20px;
     border-radius: 20px;
-    width: 90%;
+    width: 41vw;
     resize: none;
     outline: none;
     overflow: hidden;
@@ -250,8 +250,11 @@
 
   .resume-preview {
     background-color: white;
-    width: 400px;
-    height: 530px;
+    /* width: 400px;
+    height: 530px; */
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    max-width: 400px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     border-radius: 5px;
