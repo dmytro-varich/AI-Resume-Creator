@@ -81,6 +81,7 @@ class App extends React.Component {
           onRegisterClick={() => this.handleSwitchView("register")}
           setPdfBlob={this.setPdfBlob}
           setIsLoading={this.setIsLoading}
+          isLoading={isLoading}
           preferencesKey={this.state.preferencesKey}
           resetPreferences={this.resetPreferences}
         />

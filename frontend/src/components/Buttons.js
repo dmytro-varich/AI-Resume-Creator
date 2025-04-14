@@ -6,7 +6,14 @@ import { BsFiletypeHtml, BsFiletypeDocx, BsMarkdown } from "react-icons/bs";
 const backendUrl =
   "https://resumecreatorback-e8fzgxdpdpd7chaa.westeurope-01.azurewebsites.net"; 
 
-const Buttons = ({ linksRef, preferencesRef, setPdfBlob, resetPreferences, setIsLoading }) => {
+const Buttons = ({
+  linksRef,
+  preferencesRef,
+  setPdfBlob,
+  resetPreferences,
+  setIsLoading,
+  isLoading,
+}) => {
   const [isAlertActive, setIsAlertActive] = useState(false);
   const [alertTitleMessage, setAlertTitleMessage] = useState(null);
   const [alertDescMessage, setAlertDescMessage] = useState(null);
@@ -50,6 +57,11 @@ const Buttons = ({ linksRef, preferencesRef, setPdfBlob, resetPreferences, setIs
 
   // function to handle resume generation
   const handleGenerateResume = async () => {
+    if (isLoading) {
+      console.log("Resume generation already in progress.");
+      return;
+    }
+
     console.log("Generate Resume button clicked");
 
     const formData = {
@@ -89,8 +101,13 @@ const Buttons = ({ linksRef, preferencesRef, setPdfBlob, resetPreferences, setIs
       return;
     }
 
-    if (previousData && JSON.stringify(previousData) === JSON.stringify(formData)) {
-      console.log("No changes detected in form data. Skipping resume generation.");
+    if (
+      previousData &&
+      JSON.stringify(previousData) === JSON.stringify(formData)
+    ) {
+      console.log(
+        "No changes detected in form data. Skipping resume generation."
+      );
       return;
     }
     setpreviousData(formData);
@@ -134,6 +151,8 @@ const Buttons = ({ linksRef, preferencesRef, setPdfBlob, resetPreferences, setIs
       }
     } catch (error) {
       console.error("Error generating resume:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -146,14 +165,14 @@ const Buttons = ({ linksRef, preferencesRef, setPdfBlob, resetPreferences, setIs
       preferencesRef.current.value = "";
     }
 
-    resetPreferences(); 
+    resetPreferences();
     setpreviousData(null);
   };
 
   return (
     <div className="buttons-container">
-      <button className="generate-resume" onClick={handleGenerateResume}>
-        Generate Resume
+      <button className="generate-resume" onClick={handleGenerateResume} disabled={isLoading}>
+        {isLoading ? "Generating..." : "Generate Resume"}
       </button>
       <button className="reset-parameters" onClick={handleResetParameters}>
         Reset Parameters
