@@ -8,7 +8,7 @@ const Resume = ({ pdfBlob, isLoading }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "/worker/pdf.worker.min.js";
 
     const loadPdf = async () => {
       if (pdfBlob) {
