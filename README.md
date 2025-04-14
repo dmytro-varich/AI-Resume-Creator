@@ -86,7 +86,7 @@ external request and pass it on to our server on the university network, since w
 ![Architecture Diagram](Assets/ResumeCreatorArchitecture.png)
 
 # 🐳 How to Use
-- Head to the home page ([future link](https://ai-creator-resume-cvghh8fjcthhajgb.westeurope-01.azurewebsites.net/)).
+- Head to the [home page](https://ai-creator-resume-cvghh8fjcthhajgb.westeurope-01.azurewebsites.net/).
 - Create a new account or continue without registration.
 - Give your GitHub profile URL.
 - (Optional) Write additional brief information about yourself. Recommended format - (Name: John, Surname: Smith, Job: Backend Developer, University: TUKE).
