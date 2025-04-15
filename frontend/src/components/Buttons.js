@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import CustomAlert from "./Alert";
 import { BsFiletypeHtml, BsFiletypeDocx, BsMarkdown } from "react-icons/bs";
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
+const backendUrl =
+  window.runtimeConfig?.REACT_APP_BACKEND_URL || "http://localhost:8080";
 
 const Buttons = ({
   linksRef,
