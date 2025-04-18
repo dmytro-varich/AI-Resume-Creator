@@ -191,6 +191,24 @@ const Buttons = ({
 const DownloadButtons = ({ pdfBlob }) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
+  const [isAlertActive, setIsAlertActive] = useState(false);
+  const [alertTitleMessage, setAlertTitleMessage] = useState(null);
+  const [alertDescMessage, setAlertDescMessage] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  // function to set alert message and visibility
+  const showAlert = (title, description) => {
+    if (isAlertActive) return;
+
+    setIsAlertActive(true);
+    setAlertTitleMessage(title);
+    setAlertDescMessage(description);
+    setIsVisible(true);
+    setTimeout(() => {
+      setIsVisible(false);
+      setIsAlertActive(false);
+    }, 3000);
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -212,6 +230,7 @@ const DownloadButtons = ({ pdfBlob }) => {
     console.log("Download PDF button clicked");
     if (!pdfBlob) {
       console.warn("PDF blob not available yet.");
+      showAlert("No PDF available", "Please generate the resume first.");
       return;
     }
 
@@ -249,6 +268,14 @@ const DownloadButtons = ({ pdfBlob }) => {
             <BsMarkdown />
             Export to Markdown
           </button>
+        </div>
+      )}
+      {alertTitleMessage && alertDescMessage && (
+        <div className={`alert-container ${isVisible ? "show" : "hide"}`}>
+          <CustomAlert
+            title={alertTitleMessage}
+            description={alertDescMessage}
+          />
         </div>
       )}
     </div>

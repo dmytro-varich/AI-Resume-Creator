@@ -44,7 +44,7 @@ services:
     networks: 
       - common_network
     env_file:
-      - .env
+      - ./frontend/.env
 
 volumes:
   postgres_data:

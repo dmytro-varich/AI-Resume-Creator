@@ -117,7 +117,7 @@
     border-radius: 30px;
     padding: 10px 20px;
     color: white;
-    width: 80%;
+    margin-right: 25px;
   }
 
   .links-container input:focus {
@@ -140,7 +140,8 @@
     border-color: rgb(66, 66, 66);
     padding: 15px 20px;
     border-radius: 20px;
-    width: 41vw;
+    width: 40vw;
+    margin-left: 2%;
     resize: none;
     outline: none;
     overflow: hidden;
@@ -250,11 +251,10 @@
 
   .resume-preview {
     background-color: white;
-    /* width: 400px;
-    height: 530px; */
     width: 100%;
-    aspect-ratio: 3 / 4;
-    max-width: 400px;
+    max-width: 860px;
+    width: 60%;
+    aspect-ratio: 1 / 1.414;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     border-radius: 5px;
