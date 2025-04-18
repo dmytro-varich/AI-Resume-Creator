@@ -138,7 +138,7 @@ As part of the assignment, our team was required to:
 The system is deployed using a **multi-cloud** and **hybrid infrastructure** that distributes services across [Microsoft Azure](https://portal.azure.com/), [Neon.tech](https://neon.tech), and a **university-hosted server** ([TUKE](https://www.tuke.sk/)). Each component is containerized with [Docker](https://www.docker.com/), allowing consistent deployment and seamless cross-platform integration.
 
 ## 🏗️ Architecture Diagram
-![Architecture Diagram](assets/ResumeCreatorArchitecture.png)
+![Architecture Diagram](Assets/ResumeCreatorArchitecture.png)
 
 # 👥 Team
 | Name                  | Role      | Description                  |
