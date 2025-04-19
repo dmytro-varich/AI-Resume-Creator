@@ -69,7 +69,7 @@ As part of the assignment, our team was required to:
 ![Canva](https://img.shields.io/badge/Canva-00C4CC?style=for-the-badge&logo=canva&logoColor=white)
 
 # 🎥 Demo Video
-... 
+![AI-RESUME-CREATOR](Assets/demo-video.mp4)
 
 # ▶️ How to Use
 1. Head to the [home page](https://ai-creator-resume-cvghh8fjcthhajgb.westeurope-01.azurewebsites.net/) — you will see the **login/register** menu.
@@ -121,7 +121,7 @@ As part of the assignment, our team was required to:
    ```
 5. Access the application in your web browser:
    - **Frontend:** [http://localhost:3000](http://localhost:3000).  
-   - **Backend:** [http://localhost:8000](http://localhost:8000).
+   - **Backend:** [http://localhost:8080](http://localhost:8080).
    - **Parser Service:** [http://localhost:5000](http://localhost:5000).
 
 6. To enter a running container:
