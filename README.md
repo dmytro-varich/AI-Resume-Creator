@@ -69,7 +69,9 @@ As part of the assignment, our team was required to:
 ![Canva](https://img.shields.io/badge/Canva-00C4CC?style=for-the-badge&logo=canva&logoColor=white)
 
 # 🎥 Demo Video
-![AI-RESUME-CREATOR](Assets/demo-video.mp4)
+https://github.com/user-attachments/assets/c7e3ad45-f0f3-411d-bb12-c7c22a0af55d
+
+
 
 # ▶️ How to Use
 1. Head to the [home page](https://ai-creator-resume-cvghh8fjcthhajgb.westeurope-01.azurewebsites.net/) — you will see the **login/register** menu.
