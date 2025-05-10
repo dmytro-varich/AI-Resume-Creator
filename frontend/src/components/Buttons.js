@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import CustomAlert from "./Alert";
 import { BsFiletypeHtml, BsFiletypeDocx, BsMarkdown } from "react-icons/bs";
+import { IoDocumentText, IoChevronBack } from "react-icons/io5";
+
 
 const backendUrl =
   window.runtimeConfig?.REACT_APP_BACKEND_URL || "http://localhost:8080";
@@ -92,7 +94,7 @@ const Buttons = ({
       return;
     }
 
-    if (!isValidProfileLink(formData.github, "github") && formData.github) {
+    if (!isValidProfileLink(formData.github, "github") && formData.github) { 
       showAlert(
         "Invalid Profile Links",
         "Please make sure you enter a valid profile link. For LinkedIn, use a link like: linkedin.com/in/your-profile. For GitHub, use a link like: github.com/your-profile."
@@ -170,7 +172,11 @@ const Buttons = ({
 
   return (
     <div className="buttons-container">
-      <button className="generate-resume" onClick={handleGenerateResume} disabled={isLoading}>
+      <button
+        className="generate-resume"
+        onClick={handleGenerateResume}
+        disabled={isLoading}
+      >
         {isLoading ? "Generating..." : "Generate Resume"}
       </button>
       <button className="reset-parameters" onClick={handleResetParameters}>
@@ -188,7 +194,7 @@ const Buttons = ({
   );
 };
 
-const DownloadButtons = ({ pdfBlob }) => {
+const DownloadButtons = ({ pdfBlob, setIsPreviewResume }) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
   const [isAlertActive, setIsAlertActive] = useState(false);
@@ -247,6 +253,12 @@ const DownloadButtons = ({ pdfBlob }) => {
 
   return (
     <div className="download-buttons">
+      <button
+        className="mobile-back-button"
+        onClick={() => setIsPreviewResume(false)}
+      >
+        <IoChevronBack size={24} />
+      </button>
       <button className="download-pdf" onClick={handleDownloadPDF}>
         Download PDF
       </button>
@@ -258,13 +270,13 @@ const DownloadButtons = ({ pdfBlob }) => {
           className="absolute right-5 top-20 w-56 h-35 drop-shadow-sm border rounded-lg shadow-md bg-[#d9d9d9] z-50"
           ref={containerRef}
         >
-          <button className="w-full gap-2 flex items-center py-2 px-3 text-red bg-[#1e1e1e] rounded-lg hover:bg-[#424242]">
+          <button className="w-full gap-2 flex items-center py-2 px-3 text-[#1e1e1e] font-bold bg-[#d9d9d9] rounded-lg hover:bg-[#424242]">
             <BsFiletypeDocx /> Export to DOCX
           </button>
-          <button className="w-full gap-2 flex items-center py-2 px-3 text-white bg-[#1e1e1e] rounded-lg hover:bg-[#424242]">
+          <button className="w-full gap-2 flex items-center py-2 px-3 text-[#1e1e1e] font-bold bg-[#d9d9d9] rounded-lg hover:bg-[#424242]">
             <BsFiletypeHtml /> Export to HTML
           </button>
-          <button className="w-full gap-2 flex items-center py-2 px-3 text-white bg-[#1e1e1e] rounded-lg hover:bg-[#424242]">
+          <button className="w-full gap-2 flex items-center py-2 px-3 text-[#1e1e1e] font-bold bg-[#d9d9d9] rounded-lg hover:bg-[#424242]">
             <BsMarkdown />
             Export to Markdown
           </button>
@@ -282,5 +294,17 @@ const DownloadButtons = ({ pdfBlob }) => {
   );
 };
 
+const PreviewButton = ({ setIsPreviewResume }) => {
+  return (
+    <button
+      className="mobile-show-preview"
+      onClick={() => setIsPreviewResume(true)}
+    >
+      Preview Resume <IoDocumentText size={35} />
+    </button>
+  );
+};
+
 export default Buttons;
 export { DownloadButtons };
+export { PreviewButton };

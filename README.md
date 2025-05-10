@@ -72,7 +72,6 @@ As part of the assignment, our team was required to:
 https://github.com/user-attachments/assets/c7e3ad45-f0f3-411d-bb12-c7c22a0af55d
 
 
-
 # ▶️ How to Use
 1. Head to the [home page](https://ai-creator-resume-cvghh8fjcthhajgb.westeurope-01.azurewebsites.net/) — you will see the **login/register** menu.
 2. **Create an account**, **log in**, or click **"Don't Enter"** to use the web-application without registration.  

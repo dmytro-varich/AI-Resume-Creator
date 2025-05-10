@@ -10,6 +10,7 @@
     color: white;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     overflow-x: hidden;
+    box-sizing: border-box;
   }
 
   @layer base {
@@ -88,8 +89,10 @@
     margin-right: 40px;
   }
 
-  .links-container {
+  .links-container,
+  .preferences-container {
     margin-top: 50px;
+    max-width: 40vw;
   }
 
   .links-container h2 {
@@ -99,8 +102,8 @@
   .link-input-container {
     display: flex;
     align-items: center;
-    gap: 0px;
-    margin-bottom: 15px;
+    gap: 10px;
+    margin-bottom: 2%;
     margin-left: 2%;
   }
 
@@ -117,17 +120,12 @@
     border-radius: 30px;
     padding: 10px 20px;
     color: white;
-    margin-right: 25px;
   }
 
   .links-container input:focus {
     outline: none;
     box-shadow: none;
     border: 1px solid #d9d9d9;
-  }
-
-  .preferences-container {
-    margin-top: 50px;
   }
 
   .preferences-container h2 {
@@ -140,7 +138,6 @@
     border-color: rgb(66, 66, 66);
     padding: 15px 20px;
     border-radius: 20px;
-    width: 40vw;
     margin-left: 2%;
     resize: none;
     outline: none;
@@ -202,8 +199,24 @@
     color: #e0e0e0;
   }
 
+  .mobile-show-preview {
+    visibility: hidden;
+    z-index: 50;
+    display: none;
+    position: absolute;
+    background-color: #424242;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-weight: bold;
+    color: #d9d9d9;
+    width: 100%;
+  }
+
   .resume-visualization {
     flex-grow: 1;
+    visibility: visible;
+    display: block;
     background-color: #424242;
     overflow: hidden;
     position: fixed;
@@ -214,15 +227,22 @@
     /* box-shadow: -5px 0px 20px -5px rgba(0, 0, 0, 0.5); */
   }
 
+  .mobile-back-button {
+    visibility: hidden;
+    z-index: 50;
+    display: none;
+  }
+
   .download-buttons {
-    margin-top: 20px;
+    padding-top: 20px;
     display: flex;
     gap: 15px;
     justify-content: flex-end;
-    margin-right: 25px;
+    padding-right: 2vw;
   }
 
-  .download-buttons button {
+  .download-pdf,
+  .download-formats {
     background-color: #d9d9d9;
     border: none;
     padding: 10px 15px;
@@ -233,11 +253,13 @@
     outline: none;
   }
 
-  .download-buttons button:hover {
+  .download-pdf:hover,
+  .download-formats:hover {
     background-color: #c0c0c0;
   }
 
-  .download-buttons button:active {
+  .download-pdf:active,
+  .download-formats:active {
     background-color: #b0b0b0;
   }
 
@@ -247,13 +269,12 @@
     align-items: center;
     margin-top: 30px;
     flex-direction: column;
+    height: 80vh;
   }
 
   .resume-preview {
     background-color: white;
-    width: 100%;
-    max-width: 860px;
-    width: 60%;
+    width: 45%;
     aspect-ratio: 1 / 1.414;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     overflow: hidden;
@@ -263,7 +284,7 @@
     justify-content: center;
   }
 
-  .resume-previev canvas {
+  .resume-preview canvas {
     display: block;
     margin: 0 auto;
     width: 100%;
@@ -274,6 +295,7 @@
     display: flex;
     flex-direction: row;
     margin-top: 20px;
+    align-items: center;
   }
 
   .switch-left svg {

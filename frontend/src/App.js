@@ -14,6 +14,7 @@ class App extends React.Component {
       pdfBlob: null,
       preferencesKey: 0,
       isLoading: false,
+      isPreviewResume: false,
     };
   }
 
@@ -38,6 +39,10 @@ class App extends React.Component {
       preferencesKey: prevState.preferencesKey + 1,
     }));
   };
+
+  setIsPreviewResume = (value) => {
+    this.setState({ isPreviewResume: value });
+  }
 
   renderAuthForm() {
     const { authView } = this.state;
@@ -72,9 +77,11 @@ class App extends React.Component {
   render() {
     const { pdfBlob } = this.state;
     const { isLoading } = this.state;
+    const { isPreviewResume } = this.state;
     return (
-      <div className="relative min-h-screen">
+      <div className="app-container relative min-h-screen">
         <ResumeForm
+          className={`resume-form ${isPreviewResume ? "hidden" : "visible"}`}
           onSwitchView={this.handleSwitchView}
           onSkip={this.handleSkip}
           onLoginClick={() => this.handleSwitchView("login")}
@@ -82,11 +89,19 @@ class App extends React.Component {
           setPdfBlob={this.setPdfBlob}
           setIsLoading={this.setIsLoading}
           isLoading={isLoading}
+          setIsPreviewResume={this.setIsPreviewResume}
           preferencesKey={this.state.preferencesKey}
           resetPreferences={this.resetPreferences}
         />
-        <Visualisation pdfBlob={pdfBlob} isLoading={isLoading} />
-
+        <Visualisation
+          className={`resume-visualization ${
+            isPreviewResume ? "visible" : "hidden"
+          }`}
+          pdfBlob={pdfBlob}
+          isLoading={isLoading}
+          setIsPreviewResume={this.setIsPreviewResume}
+          isPreviewResume={isPreviewResume}
+        />
         {this.state.authView && (
           <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
             {this.renderAuthForm()}

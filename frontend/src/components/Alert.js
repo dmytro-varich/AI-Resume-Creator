@@ -2,7 +2,7 @@ import React from "react";
 
 const CustomAlert = ({ title, description }) => {
   return (
-    <div role="alert" className="border-s-4 border-red-700 bg-red-50 p-4">
+    <div role="alert" className="custom-alert border-s-4 border-red-700 bg-red-50 p-4">
       <div className="flex items-center gap-2 text-red-700">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +28,7 @@ const CustomAlert = ({ title, description }) => {
 
 const SuccessAlert = ({ title, description }) => {
   return (
-    <div role="alert" className="border-s-4 border-green-700 bg-green-50 p-4">
+    <div role="alert" className="custom-alert border-s-4 border-green-700 bg-green-50 p-4">
       <div className="flex items-center gap-2 text-green-700">
         <svg
           xmlns="http://www.w3.org/2000/svg"

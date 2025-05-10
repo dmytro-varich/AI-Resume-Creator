@@ -1,0 +1,287 @@
+/* Mobile 3 version */
+@media screen and (max-width: 360px) {
+  .auth-window {
+    margin: 10px;
+  }
+
+  .buttons-container {
+    gap: 10px;
+    font-size: smaller;
+  }
+
+  .mobile-show-preview {
+    font-size: smaller;
+  }
+
+  .mobile-show-preview svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  .custom-alert {
+    margin: 20px;
+  }
+}
+
+/* Mobile 2 version */
+@media screen and (max-width: 767px) {
+  .hidden {
+    visibility: hidden;
+    display: none;
+  }
+
+  .visible {
+    visibility: visible;
+    display: block;
+  }
+
+  .resume-form {
+    padding-right: 0;
+    overflow-y: hidden;
+    position: relative;
+    height: 100vh;
+  }
+
+  .resume-visualization {
+    width: 100vw;
+  }
+
+  .header-container p {
+    width: 100%;
+  }
+
+  .links-container,
+  .preferences-container {
+    max-width: 90vw;
+  }
+
+  .link-input-container {
+    margin-bottom: 4%;
+  }
+
+  .links-container input {
+    padding: 5px 10px;
+    font-size: small;
+  }
+
+  .github-input span {
+    margin-right: 7px;
+  }
+
+  .preferences-container textarea {
+    margin-left: 0;
+  }
+
+  .mobile-show-preview {
+    visibility: visible;
+    display: flex;
+    right: 3%;
+    width: 50%;
+    bottom: 3%;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .download-buttons {
+    background-color: #1e1e1e;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    display: flex;
+    position: relative;
+    align-items: center;
+  }
+
+  .mobile-back-button {
+    visibility: visible;
+    display: block;
+    background-color: none;
+    border: none;
+    position: absolute;
+    left: 5px;
+    stroke: #d9d9d9;
+    fill: #d9d9d9;
+  }
+
+  .resume-container {
+    margin-top: 0;
+  }
+
+  .mobile-resume-preview {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .resume-preview {
+    width: 80%;
+  }
+
+  .custom-alert {
+    margin: 20px;
+  }
+}
+
+/* Mobile 1 version */
+@media screen and (max-height: 719px) {
+  .auth-window {
+    margin: 10px;
+  }
+
+  .github-input span {
+    margin-right: 7px;
+  }
+
+  .mobile-show-preview {
+    visibility: visible;
+    display: flex;
+    font-size: smaller;
+    left: 3%;
+    width: 45vw;
+    max-width: 50%;
+    top: 2%;
+    height: 45px;
+    bottom: 0;
+    right: 0;
+    align-items: center;
+    justify-content: space-evenly;
+    box-shadow: none;
+  }
+
+  .mobile-show-preview svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  .buttons-container {
+    gap: 10px;
+    font-size: smaller;
+  }
+
+  .custom-alert {
+    margin: 20px;
+  }
+}
+
+/* For Surface Duo sizes */
+@media screen and (width: 540px) and (height: 720px) {
+  .mobile-show-preview {
+    width: 36%;
+    bottom: 2%;
+  }
+}
+
+/* Tablet version */
+@media screen and (min-width: 768px) and (max-width: 1024px) and (min-height: 1000px) {
+  .app {
+    display: block;
+  }
+
+  .resume-form {
+    width: 100%;
+    padding-right: 0;
+    height: 100vh;
+  }
+
+  .mobile-show-preview {
+    visibility: visible;
+    display: flex;
+    right: 3%;
+    width: 26%;
+    bottom: 3%;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .links-input {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .links-container,
+  .preferences-container {
+    max-width: 94vw;
+  }
+
+  .resume-visualization {
+    /* display: none; */
+    /* visibility: hidden; */
+    width: 100vw;
+    box-shadow: -5px 0px 20px -5px rgba(0, 0, 0, 0.5);
+  }
+
+  .download-buttons {
+    background-color: #1e1e1e;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    display: flex;
+    position: relative;
+    align-items: center;
+  }
+
+  .mobile-back-button {
+    visibility: visible;
+    display: block;
+    background-color: none;
+    border: none;
+    position: absolute;
+    left: 5px;
+    stroke: #d9d9d9;
+    fill: #d9d9d9;
+  }
+
+  .resume-container {
+    margin-top: 10%;
+  }
+
+  .mobile-resume-preview {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .resume-preview {
+    width: 75vw;
+  }
+}
+
+/* Special styles for tablets */
+@media screen and (min-width: 912px) and (max-width: 1024px) {
+  .mobile-show-preview {
+    width: 21%;
+  }
+}
+
+/* PC and laptop version + nest hub size*/
+@media screen and (min-width: 1025px),
+  screen and (min-width: 1024px) and (max-height: 600px) {
+  .resume-container {
+    height: 90vh;
+    margin-top: 2%;
+  }
+
+  /* .resume-preview {
+    width: 45%;
+  } */
+
+  .page-indicator {
+    font-size: 1.5rem;
+  }
+
+  .switch-left svg,
+  .switch-right svg {
+    width: 34px;
+    height: 34px;
+  }
+
+  .resume-visualization {
+    display: block;
+    visibility: visible;
+  }
+
+  .mobile-show-preview {
+    display: none;
+    visibility: hidden;
+  }
+}

@@ -10,7 +10,7 @@ const Preferences = forwardRef((props, ref) => {
         ref={ref}
         minRows={1}
         placeholder="Describe any additional details..."
-        className="preferences-textarea"
+        className="preferences-textarea w-full"
         id="preferences-textarea"
       />
     </div>

@@ -96,7 +96,7 @@ export function RegistrationForm({ onSkip, onSwitch }) {
   };
 
   return (
-    <Card className="bg-[#1e1e1e] rounded-2xl p-6 w-[400px] shadow-lg">
+    <Card className="auth-window bg-[#1e1e1e] rounded-2xl p-6 w-[400px] shadow-lg">
       <Typography variant="h3" className="text-white font-bold">
         Get Started
       </Typography>
@@ -280,7 +280,7 @@ export function LoginForm({ onSkip, onSwitch }) {
   };
 
   return (
-    <Card className="bg-[#1e1e1e] rounded-2xl p-6 w-[400px] shadow-lg">
+    <Card className="auth-window bg-[#1e1e1e] rounded-2xl p-6 w-[400px] shadow-lg">
       <Typography variant="h3" className="text-white font-bold">
         Welcome Back
       </Typography>
@@ -362,7 +362,7 @@ export function AuthorizationForm({ onSkip, onSwitch }) {
     }
   }, [onSkip]);
   return (
-    <Card className="bg-[#1e1e1e] rounded-2xl p-6 w-[380px] shadow-lg">
+    <Card className="auth-window bg-[#1e1e1e] rounded-2xl p-6 w-[380px] shadow-lg">
       <div className="flex flex-col items-center justify-between">
         <h2 className="text-white text-3xl font-bold">Welcome!</h2>
         <p className="text-gray-400 mt-2 text-sm w-3/4 text-center">

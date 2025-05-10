@@ -3,7 +3,7 @@ import Account from "./Account";
 import Header from "./Header";
 import Links from "./Links";
 import Preferences from "./Preferences";
-import Buttons from "./Buttons";
+import Buttons, { PreviewButton } from "./Buttons";
 
 class ResumeForm extends React.Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class ResumeForm extends React.Component {
     const { onLoginClick, onRegisterClick, preferencesKey, resetPreferences } =
       this.props;
     return (
-      <div className="resume-form">
+      <div className={this.props.className}>
         <Account
           onLoginClick={onLoginClick}
           onRegisterClick={onRegisterClick}
@@ -32,6 +32,7 @@ class ResumeForm extends React.Component {
           isLoading={this.props.isLoading}
           resetPreferences={resetPreferences}
         />
+        <PreviewButton setIsPreviewResume={this.props.setIsPreviewResume} />
       </div>
     );
   }
