@@ -27,15 +27,15 @@ namespace ResumeCreatorBackend.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly AccountService _accountService;
+        private readonly IAccountService _accountService;
 
-        public AccountController(AccountService accountService)
+        public AccountController(IAccountService accountService)
         {
             _accountService = accountService;
         }
 
         [HttpPost("CreateAccountAsync")]
-        public async Task<IActionResult> CreateAccountAsync([FromBody] CreateAccountTemp receivedModel)
+        public async Task<IActionResult> CreateAccountAsync([FromBody] CreateAccountTemp? receivedModel)
         {
             if (receivedModel == null)
             {
