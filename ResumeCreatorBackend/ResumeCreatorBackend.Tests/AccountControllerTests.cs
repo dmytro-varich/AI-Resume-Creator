@@ -75,5 +75,28 @@ namespace ResumeCreatorBackend.Tests
 
             Assert.True(returnedModelState.ContainsKey("Password"));
         }
+
+        [Fact]
+        public async Task CreateAccountAsync_ExistingAccount_ReturnsBadRequest()
+        {
+            var createAccountTempModel = new CreateAccountTemp() 
+            {
+                Name = "John12",
+                Email = "johny12@gmail.com",
+                Password = "password"
+            };
+
+            var mockAccountService = new Mock<IAccountService>();
+            mockAccountService
+                .Setup(s => s.CreateAccountAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+                .ThrowsAsync(new InvalidOperationException("Account with the given email alredy exists."));
+
+            var accountController = new AccountController(mockAccountService.Object);
+
+            var result = await accountController.CreateAccountAsync(createAccountTempModel);
+
+            var badRequest = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.Equal("Account with the given email already exists.", badRequest.Value);
+        }
     }
 }
