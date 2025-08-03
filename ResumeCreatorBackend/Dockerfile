@@ -1,6 +1,6 @@
 
 # This stage is used when running from VS in fast mode (Default for Debug configuration)
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-bookworm AS base
 
 # Switch to root temporarily to install pdflatex-related packages.
 USER root
@@ -10,7 +10,8 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         texlive-latex-base \
         texlive-latex-extra \
-        texlive-fonts-recommended && \
+        texlive-fonts-recommended \
+        texlive-moderncv && \
     rm -rf /var/lib/apt/lists/*
 
 # Switch back to your application user.

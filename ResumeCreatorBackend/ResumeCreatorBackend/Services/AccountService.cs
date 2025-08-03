@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace ResumeCreatorBackend.Services
 {
-    public class AccountService
+    public class AccountService : IAccountService
     {
         private readonly ApplicationDbContext _context;
         private readonly PasswordHasher<AccountModel> _passwordHasher;
