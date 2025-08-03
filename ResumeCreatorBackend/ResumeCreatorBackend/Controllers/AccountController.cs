@@ -64,7 +64,7 @@ namespace ResumeCreatorBackend.Controllers
         }
 
         [HttpPost("VerifyPasswordAsync")]
-        public async Task<IActionResult> VerifyPasswordAsync([FromBody] CreateAccountTemp receivedModel)
+        public async Task<IActionResult> VerifyPasswordAsync([FromBody] CreateAccountTemp? receivedModel)
         {
             if (receivedModel == null)
             {
